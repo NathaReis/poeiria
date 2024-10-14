@@ -1,0 +1,31 @@
+@import url(../global.css);
+
+main {
+    width: 100dvw;
+    height: calc(100dvh - 69px);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    .box {
+        width: 80dvw;
+        max-width: 250px;
+        max-height: 300px;
+        background-color: #9d9d9d;
+        padding: 20px;
+        border-radius: 10px;
+        display: grid;
+        align-items: center;
+        gap: 20px;
+        overflow: hidden auto;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1rem;
+            font-family: sans-serif;
+        }
+    }
+}
