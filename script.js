@@ -16,7 +16,7 @@ function poeiria(data) {
         card.classList.add("card");
         const img = document.createElement("div");
         img.classList.add("img");
-        img.style = poeiria.url ? `--url: url(${poeiria.url})` : '--url: url(./assets/por-do-sol.jpg)';
+        img.style = poeiria.url ? `--url: url(${poeiria.url})` : '--url: url(./assets/book.webp)';
         const p = document.createElement("p");
         p.innerHTML = `<strong>${poeiria.title}</strong> ${poeiria.lines.join(", ")}`;
 
