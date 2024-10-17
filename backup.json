@@ -1,6 +1,7 @@
 {
   "poeiria": [
     {
+      "author": "Nathan Reis",
       "title": "Surpresa",
       "lines": [
         "De suspense pensa eu",
@@ -12,6 +13,7 @@
       "id": "e0ce"
     },
     {
+      "author": "Nathan Reis",
       "title": "Abelhar",
       "lines": [
         "Ouço zunido de uma abelha",
@@ -32,6 +34,7 @@
       "id": "21fa"
     },
     {
+      "author": "Nathan Reis",
       "title": "Terror Total",
       "lines": [
         "A esperança é inútil",
@@ -57,6 +60,7 @@
       "id": "c602"
     },
     {
+      "author": "Nathan Reis",
       "title": "Adianta",
       "lines": [
         "C de carro",
@@ -68,6 +72,7 @@
       "id": "794a"
     },
     {
+      "author": "Nathan Reis",
       "title": "Aprendiz",
       "lines": [
         "Se a vida ensina",
@@ -102,7 +107,8 @@
       "id": "f8a2"
     },
     {
-      "title": "Candeia",
+      "author": "",
+      "title": "Candeias",
       "lines": [
         "Candeia do cais que vejo de noite",
         "Que vejo acorda e brilha a foice",
@@ -115,6 +121,7 @@
       "id": "9ddc"
     },
     {
+      "author": "Nathan Reis",
       "title": "Canto Estrelado",
       "lines": [
         "O canto das entrelas na escuridão",
@@ -133,6 +140,7 @@
       "id": "f628"
     },
     {
+      "author": "Nathan Reis",
       "title": "Chance",
       "lines": [
         "Caso perca a chance",
@@ -146,6 +154,7 @@
       "id": "be51"
     },
     {
+      "author": "Nathan Reis",
       "title": "Estrangeiro",
       "lines": [
         "Em terra tão distante",
@@ -161,6 +170,7 @@
       "id": "f22d"
     },
     {
+      "author": "Nathan Reis",
       "title": "Estrela",
       "lines": [
         "Vejo uma estrela ao céu",
@@ -194,6 +204,7 @@
       "id": "5cee"
     },
     {
+      "author": "Nathan Reis",
       "title": "Estrela Só",
       "lines": [
         "Estrela canta com",
@@ -215,6 +226,7 @@
       "id": "e79d"
     },
     {
+      "author": "Nathan Reis",
       "title": "Faisca",
       "lines": [
         "Cada vento de sua voz",
@@ -232,6 +244,7 @@
       "id": "4dd0"
     },
     {
+      "author": "Nathan Reis",
       "title": "Fim",
       "lines": [
         "Ar que exalo",
@@ -252,6 +265,7 @@
       "id": "4e3d"
     },
     {
+      "author": "Nathan Reis",
       "title": "Fingir",
       "lines": [
         "Grama que não é pisada",
@@ -273,6 +287,7 @@
       "id": "4b88"
     },
     {
+      "author": "Nathan Reis",
       "title": "Folha Seca",
       "lines": [
         "Solidão é minha companhia",
@@ -296,6 +311,7 @@
       "id": "578a"
     },
     {
+      "author": "Nathan Reis",
       "title": "Grama",
       "lines": [
         "Sou grama não pisada",
@@ -314,6 +330,7 @@
       "id": "8264"
     },
     {
+      "author": "Nathan Reis",
       "title": "Homízio",
       "lines": [
         "Lar que dorme com lençóis de meio metro",
@@ -331,6 +348,7 @@
       "id": "6402"
     },
     {
+      "author": "Nathan Reis",
       "title": "Horizonte",
       "lines": [
         "Esquece que já foi inteiro",
@@ -350,6 +368,7 @@
       "id": "3f48"
     },
     {
+      "author": "Nathan Reis",
       "title": "Mudança",
       "lines": [
         "Sou nérsio de toda loucura",
@@ -371,15 +390,16 @@
       "id": "abee"
     },
     {
+      "author": "Nathan Reis",
       "title": "Passado",
       "lines": [
         "E cada centímetro desse papel",
-        "Cada cor, cada sorriso alheio",
+        "Cada cor cada sorriso alheio",
         "Detalhes só detalhes do seu olhar",
         "Detalhes que não cabem no coração",
         "",
         "E cada fio de seu cabelo",
-        "Cada traço, cada desenho cheio",
+        "Cada traço cada desenho cheio",
         "Detalhes só detalhes do seu abraço",
         "Detalhes que não cabem no coração"
       ],
@@ -387,6 +407,7 @@
       "id": "1866"
     },
     {
+      "author": "Nathan Reis",
       "title": "Pesadelo",
       "lines": [
         "Perdi o sonho e a esperança em segredo",
@@ -407,6 +428,7 @@
       "id": "2597"
     },
     {
+      "author": "Nathan Reis",
       "title": "Querer",
       "lines": [
         "Ar que beija folhagem",
@@ -418,6 +440,7 @@
       "id": "ab20"
     },
     {
+      "author": "Nathan Reis",
       "title": "Sabiá",
       "lines": [
         "Canta velho sabiá",
@@ -441,7 +464,8 @@
       "id": "76f0"
     },
     {
-      "title": "Se na Vida",
+      "author": "Nathan Reis",
+      "title": "Cigarra",
       "lines": [
         "Se na vida",
         "Tudo vai",
@@ -456,6 +480,7 @@
       "id": "0924"
     },
     {
+      "author": "Nathan Reis",
       "title": "Sino",
       "lines": [
         "Sou só sino",
@@ -479,6 +504,7 @@
       "id": "425d"
     },
     {
+      "author": "Nathan Reis",
       "title": "Vento",
       "lines": [
         "Sopro à folha canta",
@@ -506,6 +532,7 @@
       "id": "589b"
     },
     {
+      "author": "Nathan Reis",
       "title": "Feliz",
       "lines": [
         "E se eu dissesse",
@@ -521,6 +548,7 @@
         "Nessa música que canto",
         "Em um grito solitário"
       ],
+      "url": "https://images.pexels.com/photos/6471779/pexels-photo-6471779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       "id": "2090"
     }
   ]
