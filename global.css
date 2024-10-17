@@ -75,7 +75,7 @@ input, textarea {
 }
 
 textarea {
-    min-height: 80px;
+    min-height: 220px;
     max-height: 240px;
 }
 
