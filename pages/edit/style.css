@@ -1,0 +1,61 @@
+@import url(../../global.css);
+
+main {
+    width: 100dvw;
+    height: calc(100dvh - 69px);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    form {
+        width: 80dvw;
+        max-width: 250px;
+        max-height: calc(100dvh - 270px);
+        background-color: #1d1d1d;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        display: grid;
+        align-items: center;
+        gap: 20px;
+        overflow: hidden auto;
+        cursor: default;
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            button {
+                cursor: pointer;
+                height: 40px;
+                padding: 10px;
+                border-radius: 10px;
+                border: .5px solid #fff;
+                background-color: #000;
+                color: #fff;
+                outline: none;
+                font-size: 1rem;
+                color: var(--color);
+                transition: .3s;
+            }
+
+            button:hover {
+                color: #fff;
+                border: .5px solid var(--color);
+                background-color: var(--color);
+            }
+            
+            button:disabled {
+                cursor: not-allowed;
+                opacity: .9;
+            }
+            
+            button:disabled:hover {
+                color: #fff;
+                border: .5px solid var(--color);
+                background-color: #000;
+            }
+        }
+    }
+}

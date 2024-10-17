@@ -17,7 +17,7 @@ header {
     width: 100dvw;
 
     .box {
-        background-color: #9d9d9d;
+        background-color: #2d2d2d;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -28,6 +28,11 @@ header {
             color: #0d0d0d;
             letter-spacing: 3px;
             cursor: pointer;
+        }
+
+        #slogan:hover {
+            color: #2d2d2d;
+            text-shadow: 0 0 10px #ffffff85, 0 0 50px #fff;
         }
 
         menu {
@@ -56,3 +61,67 @@ header {
     }
 }
 
+input, textarea {
+    max-width: 230px;
+    min-width: 230px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    border: .5px solid #fff;
+    background-color: #000;
+    color: #fff;
+    outline: none;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 80px;
+    max-height: 240px;
+}
+
+#loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: #0002;
+    backdrop-filter: blur(5px);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    display: inline-grid;
+    width: 60px;
+    aspect-ratio: 1;
+}
+.loader:before,
+.loader:after {
+    content:"";
+    grid-area: 1/1;
+    border-radius: 50%;
+    background: repeating-conic-gradient(#C02942 0 60deg,#0B486B 0 120deg);
+    animation: l7 2s infinite alternate ease-in-out;
+    rotate: 90deg;
+    filter: drop-shadow(0 0 20px #ffffff60);
+}
+.loader:before {
+    translate: 0 -100%;
+}
+.loader:after {
+    padding: 20%;
+    mask:conic-gradient(from 120deg,#0000 120deg,#000 0) content-box exclude,conic-gradient(from 120deg,#0000 120deg,#000 0);
+    animation-direction: alternate-reverse;
+}
+@keyframes l7 {
+    to {
+        rotate: -90deg;
+    }
+}
+
+.hidden {
+    display: none !important;
+}

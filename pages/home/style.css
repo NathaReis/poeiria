@@ -1,11 +1,20 @@
-@import url(./global.css);
+@import url(../../global.css);
 
 main {
-    margin-top: 100px;
     display: grid;
     align-items: center;
     justify-content: center;
     overflow: auto;
+    padding-bottom: 100px;
+
+    #search-box {
+        width: 100dvw;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 50px 0;
+    }
 
     .box {
         display: flex;
@@ -24,6 +33,7 @@ main {
             display: grid;
             justify-content: center;
             align-items: center;
+            cursor: pointer;           
 
             .img {
                 width: 100%;
@@ -44,7 +54,6 @@ main {
                 overflow: hidden;
                 text-overflow: ellipsis;  
                 font-size: .9rem;
-                cursor: pointer;           
             }
             p:hover {
                 text-decoration: underline;
