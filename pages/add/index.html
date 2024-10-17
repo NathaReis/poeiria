@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <script defer src="./script.js"></script>
-    <link rel="shortcut icon" href="../../favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/poeiria.png" type="image/x-icon">
     <title>POEIRIA</title>
 </head>
 <body>
@@ -14,13 +14,21 @@
         <header>
             <div class="box">
                 <h1 id="slogan" onclick="location = '../home/'">
+                    <img src="../../assets/poeiria.png" alt="">
                     POEIRIA
                 </h1>
                 <menu id="links">
-                    <li>
-                        <a href="./">
-                            <svg xmlns="http://www.w3.org/2000/svg" style="--color: #ffba5f" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                    <li id="add">
+                        <a href="../home/">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="--color: #ffba5f" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li id="edit">
+                        <a href="../read/">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="--color: #ffba5f" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
                             </svg>
                         </a>
                     </li>
@@ -45,9 +53,10 @@
 
         <main>
             <form>
-                <input type="text" name="title" id="title" placeholder="Título" required>
-                <textarea name="text" id="text" placeholder="Texto" required></textarea>
-                <input type="url" name="url" id="url" placeholder="Url de imagem">
+                <input type="text" name="author" placeholder="Autor" required>
+                <input type="text" name="title" placeholder="Título" required>
+                <textarea name="text" placeholder="Texto" required></textarea>
+                <input type="url" name="url" placeholder="Url de imagem">
                 <div class="buttons">
                     <button type="reset" style="--color: tomato;">Cancelar</button>
                     <button type="submit" name="submit" style="--color: rgb(71, 255, 86);" disabled>Salvar</button>

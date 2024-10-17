@@ -25,14 +25,22 @@ header {
 
         #slogan {
             font-family: sans-serif;
-            color: #0d0d0d;
+            color: #dddddd;
             letter-spacing: 3px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+
+            img {
+                width: 50px;
+            }
         }
 
         #slogan:hover {
-            color: #2d2d2d;
-            text-shadow: 0 0 10px #ffffff85, 0 0 50px #fff;
+            color: #535353;
+            text-shadow: 0 0 10px #00000085, 0 0 50px #000000;
         }
 
         menu {
@@ -45,11 +53,11 @@ header {
 
             li a svg {
                 width: 25px;
-                fill: #0d0d0d;
+                fill: #dddddd;
                 cursor: pointer;
                 padding: 10px;
-                box-shadow: 0 0 10px #0002;
-                border-radius: 50%;
+                box-shadow: 0 0 10px #ddd2;
+                border-radius: 10px;
             }
 
             li a svg:hover {
