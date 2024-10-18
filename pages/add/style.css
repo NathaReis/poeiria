@@ -32,12 +32,9 @@ main {
             #text {
                 grid-row: span 3;
             }
-
+            
             .buttons {
                 grid-column: span 2;
-            }
-
-            .buttons {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -91,6 +88,7 @@ main {
             gap: 20px;
             
             img {
+                max-width: 300px;
                 flex-grow: 1;
                 cursor: pointer;
                 border-radius: 10px;

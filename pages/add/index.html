@@ -60,13 +60,15 @@
                     <input type="text" name="author" placeholder="Autor" required>
                     <textarea name="text" id="text" placeholder="Texto" required></textarea>
                     <input type="text" name="title" placeholder="Título" required>
-                    <input type="text" name="search" id="search" placeholder="Pesquisar imagem" autocomplete="off" oninput="getImage(this)">
+                    <input type="text" name="search" id="search" placeholder="Pesquisar imagem" autocomplete="off" oninput="getImage()">
                     <div class="buttons">
                         <button type="reset" style="--color: tomato;">Cancelar</button>
                         <button type="submit" name="submit" style="--color: rgb(71, 255, 86);" disabled>Salvar</button>
                     </div>
                 </form>
-                <div id="images"></div>
+                <div id="images">
+                    <img src="">
+                </div>
             </div>
 
         </main>

@@ -9,8 +9,11 @@
     background-color: #0d0d0d;
 }
 
-::-webkit-scrollbar{
-    display: none;
+*::-webkit-scrollbar {
+    background-color: #000;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #424242;
 }
 
 header {

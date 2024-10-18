@@ -13,6 +13,7 @@ const vazio = /^\s*$/;
         poeiriaDados.search ? $form.search.value = poeiriaDados.search : null;
         poeiriaDados.url ? urlImage = poeiriaDados.url : null;
         $form.submit.disabled = false;
+        $images.querySelector("img").src = urlImage;
 
         return document.querySelector("#add").remove();
     }
@@ -59,10 +60,11 @@ $form.addEventListener("submit", (e) => {
     }
 })
 
-function getImage({ value }) {
+function getImage() {
+    const value = $form.search.value;
     $images.innerHTML = "";
     if(!vazio.test(value)) {
-        fetch(`https://api.pexels.com/v1/search?query=${value}&per_page=100`, {
+        fetch(`https://api.pexels.com/v1/search?query=${value}&locale=pt-BR&per_page=80`, {
             headers: {
                 Authorization: "Tjv2x3OIQnFfuvJtPWnXMmlZbfHKBPfoSvOwboq7Hckk5VwIptQY22gs"
             }
@@ -71,7 +73,7 @@ function getImage({ value }) {
         .then(({ photos }) => {
             photos.forEach((photo) => {
                 const img = document.createElement("img");
-                img.src = photo.src.tiny;
+                img.src = photo.src.large;
                 img.onclick = () => {
                     const $imgs = $images.querySelectorAll("img");
                     $imgs.forEach((i) => i.classList.remove("focus"));
