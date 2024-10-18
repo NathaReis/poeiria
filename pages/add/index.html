@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <script defer src="./script.js"></script>
     <link rel="shortcut icon" href="../../assets/poeiria.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="../../services/poeiria.service.js"></script>
+    <script defer src="../../global.js"></script>
+    <script defer src="./script.js"></script>
     <title>POEIRIA</title>
 </head>
 <body>
@@ -52,16 +54,21 @@
         </header>
 
         <main>
-            <form>
-                <input type="text" name="author" placeholder="Autor" required>
-                <input type="text" name="title" placeholder="Título" required>
-                <textarea name="text" placeholder="Texto" required></textarea>
-                <input type="url" name="url" placeholder="Url de imagem">
-                <div class="buttons">
-                    <button type="reset" style="--color: tomato;">Cancelar</button>
-                    <button type="submit" name="submit" style="--color: rgb(71, 255, 86);" disabled>Salvar</button>
-                </div>
-            </form>
+
+            <div class="box">
+                <form>
+                    <input type="text" name="author" placeholder="Autor" required>
+                    <textarea name="text" id="text" placeholder="Texto" required></textarea>
+                    <input type="text" name="title" placeholder="Título" required>
+                    <input type="text" name="search" id="search" placeholder="Pesquisar imagem" autocomplete="off" oninput="getImage(this)">
+                    <div class="buttons">
+                        <button type="reset" style="--color: tomato;">Cancelar</button>
+                        <button type="submit" name="submit" style="--color: rgb(71, 255, 86);" disabled>Salvar</button>
+                    </div>
+                </form>
+                <div id="images"></div>
+            </div>
+
         </main>
 
     </article>

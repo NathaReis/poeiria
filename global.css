@@ -69,8 +69,7 @@ header {
     }
 }
 
-input, textarea {
-    max-width: 230px;
+input, textarea, select {
     min-width: 230px;
     height: 40px;
     padding: 10px;
@@ -84,7 +83,11 @@ input, textarea {
 
 textarea {
     min-height: 220px;
-    max-height: 240px;
+    max-height: 220px;
+}
+
+select {
+    cursor: pointer;
 }
 
 #loading {

@@ -2,59 +2,143 @@
 
 main {
     width: 100dvw;
-    height: calc(100dvh - 69px);
-    display: grid;
+    min-height: calc(100dvh - 70px);
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    form {
-        width: 80dvw;
-        max-width: 250px;
-        max-height: calc(100dvh - 270px);
-        background-color: #1d1d1d;
-        color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        display: grid;
+    .box {
+        margin: 50px;
+        display: flex;
         align-items: center;
-        gap: 20px;
-        overflow: hidden auto;
-        cursor: default;
+        justify-content: center;
+        gap: 10px;
 
-        .buttons {
-            display: flex;
+            
+        form {
+            width: 90dvw;
+            max-width: 540px;
+            min-height: 340px;
+            background-color: #1d1d1d;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            display: grid;
             align-items: center;
-            justify-content: space-between;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            cursor: default;
 
-            button {
+            #text {
+                grid-row: span 3;
+            }
+
+            .buttons {
+                grid-column: span 2;
+            }
+
+            .buttons {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                button {
+                    cursor: pointer;
+                    height: 40px;
+                    padding: 10px;
+                    border-radius: 10px;
+                    border: .5px solid #fff;
+                    background-color: #000;
+                    color: #fff;
+                    outline: none;
+                    font-size: 1rem;
+                    color: var(--color);
+                    transition: .3s;
+                }
+
+                button:hover {
+                    color: #fff;
+                    border: .5px solid var(--color);
+                    background-color: var(--color);
+                }
+                
+                button:disabled {
+                    cursor: not-allowed;
+                    opacity: .9;
+                }
+                
+                button:disabled:hover {
+                    color: #fff;
+                    border: .5px solid var(--color);
+                    background-color: #000;
+                }
+            }
+        }
+        
+        #images {
+            min-width: 300px;
+            min-height: 340px;
+            max-width: 300px;
+            max-height: 340px;
+            overflow: hidden auto;
+            background-color: #1d1d1d;
+            border-radius: 20px;
+            padding: 15px;
+            border: 10px solid #1d1d1d;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            
+            img {
+                flex-grow: 1;
                 cursor: pointer;
-                height: 40px;
-                padding: 10px;
                 border-radius: 10px;
-                border: .5px solid #fff;
-                background-color: #000;
-                color: #fff;
-                outline: none;
-                font-size: 1rem;
-                color: var(--color);
-                transition: .3s;
+                box-shadow: 0 0 10px #0003, 0 0 50px #0002;
             }
+    
+            img:hover {
+                filter: brightness(60%);
+            }
+            
+            img.focus {
+                filter: brightness(40%);
+                border: 1px solid #dddddd;
+            }
+        }
+    }
+}
 
-            button:hover {
-                color: #fff;
-                border: .5px solid var(--color);
-                background-color: var(--color);
+@media (max-width: 950px) {
+    main {
+        .box {
+            display: grid;
+            align-items: none;
+
+            #images {
+                padding: 10px;
+                width: 90dvw;
+                max-width: 540px;
+                min-height: 100dvh;
+                max-height: 100dvh;
             }
-            
-            button:disabled {
-                cursor: not-allowed;
-                opacity: .9;
-            }
-            
-            button:disabled:hover {
-                color: #fff;
-                border: .5px solid var(--color);
-                background-color: #000;
+        }
+    }
+}
+
+@media (max-width: 620px) {
+    main {
+        .box {
+            form {
+                grid-template-columns: 1fr;
+    
+                #text {
+                    grid-row: span 1;
+                }
+    
+                .buttons {
+                    grid-column: span 1;
+                }
             }
         }
     }

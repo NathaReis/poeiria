@@ -1,0 +1,1 @@
+Poeiria.getAll().then((res) => console.log(res));

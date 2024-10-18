@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/poeiria.png" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
+    <script type="module" src="../../services/poeiria.service.js"></script>
     <script defer src="../../global.js"></script>
     <script defer src="./script.js"></script>
-    <link rel="shortcut icon" href="../../assets/poeiria.png" type="image/x-icon">
     <title>POEIRA</title>
 </head>
 <body>
@@ -47,7 +48,10 @@
 
         <main>
             <article id="search-box">
-                <input type="search" oninput="search(this)" placeholder="Pesquisar">
+                <input type="search" id="search" oninput="search(this)" placeholder="Pesquisar" autocomplete="off">
+                <select id="author" onchange="searchAuthor(this)">
+                    <option value="">Autores</option>
+                </select>
             </article>
             <article id="cards" class="box"></article>
         </main>

@@ -1,6 +1,5 @@
-const $html = document.querySelector("html");
-
-(() => {
+const createLoading = () => {
+    const $html = document.querySelector("html");
     const loadingDiv = document.createElement("div");
     loadingDiv.id = "loading";
     loadingDiv.classList.add("hidden");
@@ -10,17 +9,16 @@ const $html = document.querySelector("html");
     loadingDiv.appendChild(loading);
     
     $html.appendChild(loadingDiv);
-})()
+    return loadingDiv;
+}
 
 const isLoading = {
     true: () => {
-        const $loadingDiv = document.querySelector("#loading");
+        const $loadingDiv = document.querySelector("#loading") ? document.querySelector("#loading") : createLoading();
         $loadingDiv.classList.remove("hidden");
     },
     false: () => {
         const $loadingDiv = document.querySelector("#loading");
-        setTimeout(() => {
-            $loadingDiv.classList.add("hidden");
-        }, 1200);
+        $loadingDiv.classList.add("hidden");
     }
 }

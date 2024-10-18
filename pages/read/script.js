@@ -11,13 +11,10 @@ let poeiria;
 
 function deleteData() {
     if(confirm("Deseja excluir Poeiria?")) {
-        fetch(`https://json-server-indol-five.vercel.app/poeiria/${poeiria.id}`, {
-            method: 'DELETE'
-        })
-        .then(() => window.location = "../home/")
-        .catch((err) => {
-            console.error(err);
-            alert("Erro ao excluir Poeiria!");
-        })
+        isLoading.true();
+        Poeiria.deleteDoc(poeiria.id) 
+        .then(() => location = "../home/")
+        .catch(alert)
+        .finally(() => isLoading.false());
     }
 }
