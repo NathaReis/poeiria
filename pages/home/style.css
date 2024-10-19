@@ -79,8 +79,7 @@ main {
         .box {
             .card {
                 .img {
-                    width: 90dvw;
-                    height: auto;
+                    height: 300px;
                 }
             }
         }       
