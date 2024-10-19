@@ -72,3 +72,18 @@ main {
         }
     }
 }
+
+@media (max-width: 500px) {
+
+    main {
+        .box {
+            .card {
+                img {
+                    width: 90dvw;
+                    height: auto;
+                }
+            }
+        }       
+    }
+
+}
