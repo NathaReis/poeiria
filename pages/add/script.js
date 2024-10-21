@@ -1,5 +1,6 @@
 let poeiriaDados;
 const $form = document.querySelector("form");
+const $search = document.querySelector("#search");
 const $images = document.querySelector("main #images");
 let urlImage = "";
 const vazio = /^\s*$/; 
@@ -10,7 +11,7 @@ const vazio = /^\s*$/;
         $form.author.value = poeiriaDados.author;
         $form.title.value = poeiriaDados.title;
         $form.text.value = poeiriaDados.lines.join("\n");
-        poeiriaDados.search ? $form.search.value = poeiriaDados.search : null;
+        poeiriaDados.search ? $search.value = poeiriaDados.search : null;
         poeiriaDados.url ? urlImage = poeiriaDados.url : null;
         $form.submit.disabled = false;
         $images.querySelector("img").src = urlImage;
@@ -27,7 +28,7 @@ $form.addEventListener("input", () => {
 $form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    if((vazio.test(urlImage) && vazio.test($form.search.value)) || (!vazio.test(urlImage) && !vazio.test($form.search.value))) {
+    if((vazio.test(urlImage) && vazio.test($search.value)) || (!vazio.test(urlImage) && !vazio.test($search.value))) {
         isLoading.true()
     
         const data = {
@@ -37,7 +38,7 @@ $form.addEventListener("submit", (e) => {
         }
         const regexUrl = /^\s*$/;
         !regexUrl.test(urlImage) ? data['url'] = urlImage : null;
-        !regexUrl.test($form.search.value) ? data['search'] = $form.search.value : !regexUrl.test(urlImage) ? urlImage : null;
+        !regexUrl.test($search.value) ? data['search'] = $search.value : !regexUrl.test(urlImage) ? urlImage : null;
     
         if(!poeiriaDados) {
             Poeiria.addDoc(data)
@@ -60,8 +61,8 @@ $form.addEventListener("submit", (e) => {
     }
 })
 
-function getImage() {
-    const value = $form.search.value;
+function getImage(search) {
+    const value = search.value;
     $images.innerHTML = "";
     if(!vazio.test(value)) {
         fetch(`https://api.pexels.com/v1/search?query=${value}&locale=pt-BR&per_page=80`, {
@@ -93,5 +94,17 @@ function getImage() {
     }
     else {
         urlImage = "";
+    }
+}
+
+function formToggle(image) {
+    const $imageBox = document.querySelector("#images-box");
+    if(image) {
+        $imageBox.classList.add("active");
+        $form.classList.add("desactive");
+    }
+    else {
+        $form.classList.remove("desactive");
+        $imageBox.classList.remove("active");
     }
 }

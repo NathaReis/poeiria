@@ -56,19 +56,27 @@
         <main>
 
             <div class="box">
-                <form>
-                    <input type="text" name="author" placeholder="Autor" required>
-                    <textarea name="text" id="text" placeholder="Texto" required></textarea>
-                    <input type="text" name="title" placeholder="Título" required>
-                    <input type="text" name="search" id="search" placeholder="Pesquisar imagem" autocomplete="off" oninput="getImage()">
-                    <div class="buttons">
-                        <button type="reset" style="--color: tomato;">Cancelar</button>
-                        <button type="submit" name="submit" style="--color: rgb(71, 255, 86);" disabled>Salvar</button>
-                    </div>
-                </form>
-                <div id="images">
-                    <img src="">
+                <div id="menu">
+                    <a href="#" onclick="formToggle()">Texto</a>
+                    <a href="#" onclick="formToggle(true)">Imagem</a>
                 </div>
+                <section id="nav">
+                    <form>
+                        <input type="text" name="author" placeholder="Autor" required>
+                        <textarea name="text" id="text" placeholder="Texto" required></textarea>
+                        <input type="text" name="title" placeholder="Título" required>
+                        <div class="buttons">
+                            <button type="reset" style="--color: tomato;">Cancelar</button>
+                            <button type="submit" name="submit" style="--color: rgb(71, 255, 86);" disabled>Salvar</button>
+                        </div>
+                    </form>
+                    <div id="images-box">
+                        <input type="text" id="search" placeholder="Pesquisar imagem" autocomplete="off" oninput="getImage(this)">
+                        <div id="images">
+                            <img src="">
+                        </div>
+                    </div>
+                </section>
             </div>
 
         </main>
