@@ -1,27 +1,54 @@
 * {
     padding: 0;
     margin: 0;
-    overflow: hidden auto;
+}
+
+:root {
+    --background: #0d0d0d;
+    --header: #2d2d2d;
+    --sloganCLH: #535353;
+    --sloganCL: #dddddd;
+    --inputBG: #000;
+    --inputCL: #fff;
+    --scrollCL: #424242;
+    --scrollBG: #000;
+    --svgBGH: #0d0d0d;
+    --txt: #fff;
+    --txtI: #383838;
+}
+
+.light:root {
+    --background: #dddddd;
+    --svgBGH: #6d6d6d;
+    --header: #949494;
+    --sloganCLH: #dddddd;
+    --sloganCL: #535353;
+    --inputBG: #fff;
+    --inputCL: #000;
+    --scrollCL: #cecece;
+    --scrollBG: #eee;
+    --txt: #000;
+    --txtI: #a0a0a0;
 }
 
 .container {
     width: 100dvw;
     min-height: 100dvh;
-    background-color: #0d0d0d;
+    background-color: var(--background);
 }
 
 *::-webkit-scrollbar {
-    background-color: #000;
+    background-color: var(--scrollBG);
 }
 *::-webkit-scrollbar-thumb {
-    background-color: #424242;
+    background-color: var(--scrollCL);
 }
 
 header {
     width: 100dvw;
 
     .box {
-        background-color: #2d2d2d;
+        background-color: var(--header);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -30,7 +57,7 @@ header {
         #slogan {
             font-family: sans-serif;
             font-size: 1rem;
-            color: #dddddd;
+            color: var(--sloganCL);
             letter-spacing: 3px;
             cursor: pointer;
             display: flex;
@@ -44,7 +71,7 @@ header {
         }
 
         #slogan:hover {
-            color: #535353;
+            color: var(--sloganCLH);
             text-shadow: 0 0 10px #00000085, 0 0 50px #000000;
         }
 
@@ -61,12 +88,12 @@ header {
                 fill: #dddddd;
                 cursor: pointer;
                 padding: 10px;
-                border-radius: 50px !important;
+                border-radius: 10px;
             }
 
             li a svg:hover {
                 fill: var(--color);
-                background-color: #0d0d0d;
+                background-color: var(--svgBGH);
             }
         }
     }
@@ -77,9 +104,9 @@ input, textarea, select {
     height: 40px;
     padding: 10px;
     border-radius: 10px;
-    border: .5px solid #fff;
-    background-color: #000;
-    color: #fff;
+    border: .5px solid var(--inputCL);
+    background-color: var(--inputBG);
+    color: var(--inputCL);
     outline: none;
     font-size: 1rem;
     margin: 0 15px;

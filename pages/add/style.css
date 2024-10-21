@@ -16,18 +16,18 @@ main {
             display: flex;
             align-items: center;
             justify-content: space-around;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--txt);
             padding: 10px;
             margin: 10px;
             
             a {
                 font-family: Arial, Helvetica, sans-serif;
-                color: #eee;
+                color: var(--txt);
                 cursor: pointer;
                 text-decoration: none;
             }
             a:focus {
-                color: #333;
+                color: var(--txtI);
             }
         }
 
