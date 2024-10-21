@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../../assets/poeiria.png" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <script type="module" src="../../services/poeiria.service.js"></script>
     <script defer src="../../global.js"></script>
     <script defer src="./script.js"></script>
-    <title>POEIRA</title>
+    <link rel="shortcut icon" href="../../assets/poeiria.png" type="image/x-icon">
+    <title>Leitura</title>
 </head>
 <body>
     <article class="container">
 
         <header>
             <div class="box">
-                <h1 id="slogan" onclick="location = './'">
+                <h1 id="slogan" onclick="location = '../home/'">
                     <img src="../../assets/poeiria.png" alt="">
                     POEIRIA
                 </h1>
                 <menu id="links">
                     <li>
-                        <a href="../add/">
-                            <svg xmlns="http://www.w3.org/2000/svg" style="--color: #ffba5f" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                        <a href="../home/">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="--color: #ffba5f" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
                             </svg>
                         </a>
                     </li>
                     <li>
-                        <a href="../info/">
+                        <a href="./">
                             <svg xmlns="http://www.w3.org/2000/svg" style="--color: #70a2ff" class="bi bi-info-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                                 <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
@@ -50,13 +50,24 @@
         </header>
 
         <main>
-            <article id="search-box">
-                <input type="search" id="search" oninput="search(this)" placeholder="Pesquisar" autocomplete="off">
-                <select id="author" onchange="searchAuthor(this)">
-                    <option value="">Autores</option>
-                </select>
-            </article>
-            <article id="cards" class="box"></article>
+            
+            <div class="box">
+
+                <h1>Poeiria</h1>
+                <h3>Textos que expressam a vida</h3>
+                <br>
+                <p>
+                    <i>
+                        Feito com 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="tomato" class="bi bi-balloon-heart" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063q.068.062.132.129.065-.067.132-.129c3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3 3 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398"/>
+                        </svg>
+                        por Poeiria Team
+                    </i>
+                </p>
+
+            </div>
+
         </main>
 
     </article>

@@ -2,17 +2,15 @@
 
 main {
     width: 100dvw;
-    height: calc(100dvh - 69px);
+    height: calc(100dvh - 70px);
     display: grid;
     align-items: center;
     justify-content: center;
 
     .box {
         width: 80dvw;
-        max-width: 400px;
-        max-height: calc(100dvh - 200px);
-        /* background-color: #1d1d1d; */
-        background: linear-gradient(90deg, #000000ad, #00000042), var(--url);
+        max-width: 500px;
+        background: linear-gradient(90deg, #000000cb, #0000002f), url(https://images.pexels.com/photos/2029968/pexels-photo-2029968.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
         background-size: cover;
         background-position: center;
         color: #fff;
@@ -24,10 +22,10 @@ main {
         overflow: hidden auto;
         cursor: default;
         text-shadow: 0 0 5px #00000060;
+        font-family: Arial, Helvetica, sans-serif;
 
         h1 {
             font-size: 2rem;
-            font-family: Arial, Helvetica, sans-serif;
             letter-spacing: 2px;
         }
 
