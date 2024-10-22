@@ -2,8 +2,9 @@ let poeiriaDados;
 const $form = document.querySelector("form");
 const $search = document.querySelector("#search");
 const $images = document.querySelector("main #images");
-let urlImage = "";
 const vazio = /^\s*$/; 
+let urlImage = "";
+let currentMedia;
 
 (() => {
     poeiriaDados = JSON.parse(sessionStorage.getItem("poeiria"));
@@ -20,6 +21,15 @@ const vazio = /^\s*$/;
     }
     document.querySelector("#edit").remove();
 })()
+
+const reset = () => {
+    $search.value = "";
+    urlImage = "";
+    $images.innerHTML = "";
+    document.querySelector(".current h6").innerHTML = "";
+    document.querySelector(".max h6").innerHTML = "";
+    $form.reset();
+}
 
 $form.addEventListener("input", () => {
     $form.submit.disabled = $form.checkValidity() ? false : true;
@@ -42,7 +52,7 @@ $form.addEventListener("submit", (e) => {
     
         if(!poeiriaDados) {
             Poeiria.addDoc(data)
-            .then(() => $form.reset())
+            .then(reset)
             .catch(alert)
             .finally(() => isLoading.false());
         }
@@ -61,18 +71,22 @@ $form.addEventListener("submit", (e) => {
     }
 })
 
-function getImage(search) {
-    const value = search.value;
-    $images.innerHTML = "";
-    if(!vazio.test(value)) {
-        fetch(`https://api.pexels.com/v1/search?query=${value}&locale=pt-BR&per_page=80`, {
+function getImage(page=1) {
+    if(!vazio.test($search.value)) {
+        fetch(`https://api.pexels.com/v1/search/?locale=pt-BR&page=${page}&per_page=15&query=${$search.value}`, {
             headers: {
                 Authorization: "Tjv2x3OIQnFfuvJtPWnXMmlZbfHKBPfoSvOwboq7Hckk5VwIptQY22gs"
             }
         })
         .then(res => res.json())
-        .then(({ photos }) => {
-            photos.forEach((photo) => {
+        .then((media) => {
+            $images.innerHTML = "";
+            currentMedia = media;
+            
+            document.querySelector(".current h6").innerHTML = media.page;
+            document.querySelector(".max h6").innerHTML = Math.ceil(media.total_results / media.per_page);
+
+            media.photos.forEach((photo) => {
                 const img = document.createElement("img");
                 img.src = photo.src.large;
                 img.onclick = () => {
@@ -93,7 +107,7 @@ function getImage(search) {
         .catch(alert)
     }
     else {
-        urlImage = "";
+        reset();
     }
 }
 
@@ -106,5 +120,26 @@ function formToggle(image) {
     else {
         $form.classList.remove("desactive");
         $imageBox.classList.remove("active");
+    }
+}
+
+function page(next) {
+    if(currentMedia) {
+        if(next) {
+            if(currentMedia.page != Math.ceil(currentMedia.total_results / currentMedia.per_page)) {
+                getImage(++currentMedia.page);
+            }
+            else {
+                getImage();
+            }
+        }
+        else {
+            if(currentMedia.page != 1) {
+                getImage(--currentMedia.page);
+            }
+            else {
+                getImage(Math.ceil(currentMedia.total_results / currentMedia.per_page));
+            }
+        }
     }
 }

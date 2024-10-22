@@ -14,7 +14,7 @@ let filterSaved;
         
         // Filter
         filterSaved = JSON.parse(sessionStorage.getItem("filter"));
-        if(!vazio.test(filterSaved.search) || !vazio.test(filterSaved.author)) {
+        if(filterSaved && (!vazio.test(filterSaved.search) || !vazio.test(filterSaved.author))) {
             document.querySelector("#search").value = filterSaved.search;
             document.querySelector("#author").value = filterSaved.author;
             search(document.querySelector("#search"));

@@ -100,7 +100,6 @@ header {
 }
 
 input, textarea, select {
-    min-width: 230px;
     height: 40px;
     padding: 10px;
     border-radius: 10px;
@@ -166,4 +165,8 @@ select {
 
 .hidden {
     display: none !important;
+}
+
+.rotate {
+    transform: rotateZ(180deg);
 }

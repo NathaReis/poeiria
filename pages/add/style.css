@@ -36,7 +36,7 @@ main {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 90dvw;
+            width: 80dvw;
             max-width: 540px;
             min-height: 340px;
             overflow: hidden;
@@ -111,7 +111,7 @@ main {
                 transition: .3s;
                 position: absolute;
                 right: -120%;
-                width: 90dvw;
+                width: inherit;
                 max-width: 540px;
                 min-height: 340px;                
                 background-color: #1d1d1d;
@@ -122,8 +122,46 @@ main {
                 display: grid;
                 align-items: center;
                 justify-content: center;
+
+                .currentPage {
+                    width: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    color: var(--txt);
+                    font-family: Arial, Helvetica, sans-serif;
+
+                    div {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1rem;
+                        gap: 10px;
+                    }
+                }
+
+                .controls {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+
+                    svg {
+                        fill: var(--txt);
+                        width: 25px;
+                        cursor: pointer;
+                    }
+
+                    svg:hover {
+                        fill: var(--txtI);
+                    }
+                }
                 
                 #images {
+                    width: 100%;
                     min-height: 200px;
                     max-height: 200px;
                     display: flex;
@@ -133,7 +171,7 @@ main {
                     overflow: hidden auto;
                     
                     img {
-                        flex-basis: 200px;
+                        max-width: 200px;
                         cursor: pointer;
                         border-radius: 10px;
                         box-shadow: 0 0 10px #0003, 0 0 50px #0002;
@@ -191,6 +229,7 @@ main {
                 form {
                     width: 90%;
                     grid-template-columns: 1fr;
+                    gap: 5px;
                     
                     #text {
                         grid-row: span 1;
@@ -198,9 +237,26 @@ main {
                     
                     .buttons {
                         grid-column: span 1;
-                        margin: 0 20px;
+                        margin: 10px 20px;
                     }
                 }
+
+                #images-box {
+                    .controls {
+                        input {
+                            min-width: 150px;
+                        }
+                        svg {
+                            width: 15px;
+                        }
+                    }
+                    #images {
+                        img {
+                            max-width: 100px;
+                        }
+                    }
+                }
+
             }
     
         }
