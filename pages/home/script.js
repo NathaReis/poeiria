@@ -1,6 +1,8 @@
 const $box = document.querySelector("#cards");
 const $author = document.querySelector("#author");
+const vazio = /^\s*$/; 
 let registers = [];
+let filterSaved;
 
 (() => {
     isLoading.true();
@@ -9,6 +11,14 @@ let registers = [];
         registers = data;
         poeiria(registers);
         author(registers);
+        
+        // Filter
+        filterSaved = JSON.parse(sessionStorage.getItem("filter"));
+        if(!vazio.test(filterSaved.search) || !vazio.test(filterSaved.author)) {
+            document.querySelector("#search").value = filterSaved.search;
+            document.querySelector("#author").value = filterSaved.author;
+            search(document.querySelector("#search"));
+        } 
     })
     .catch(alert)
     .finally(() => isLoading.false())
@@ -42,8 +52,9 @@ function poeiria(data) {
 
 function author(data) {
     const authors = new Set([...data.map((d) => d.author)]);
+    const authorsOrder = [...authors].sort((a,b) => a > b ? 1 : -1 );
     const $select = document.querySelector("#author");
-    authors.forEach((author) => {
+    authorsOrder.forEach((author) => {
         const option = document.createElement("option");
         option.value = author;
         option.innerHTML = author;
@@ -54,7 +65,6 @@ function author(data) {
 const search = (element) => {
     const value = element.value;
     const regex = new RegExp(value, 'i');
-    const vazio = /^\s*$/; 
 
     const $author = document.querySelector("#author");
     const regexA = new RegExp($author.value, 'i');
@@ -63,19 +73,19 @@ const search = (element) => {
         ?poeiria(vazio.test(value) ? registers : registers.filter((register) => (regex.test(register.title) || regex.test(register.lines.join(" ")))))
         :poeiria(vazio.test(value) ? searchAuthor($author) : registers.filter((register) => 
             (regex.test(register.title) || regex.test(register.lines.join(" "))) && regexA.test(register.author)));
+    sessionStorage.setItem("filter", JSON.stringify({search: value, author: $author.value}));
 }
 
 const searchAuthor = (element) => {
     const value = element.value;
-    const regex = new RegExp(value, 'i');
-    const vazio = /^\s*$/; 
-
+    const regex = new RegExp(value, 'i');    
     
     const $search = document.querySelector("#search");
     const regexS = new RegExp($search.value, 'i');
     
     vazio.test($search.value) 
-        ?poeiria(vazio.test(value) ? registers : registers.filter((register) => regex.test(register.author)))
-        :poeiria(vazio.test(value) ? search($search) : registers.filter((register) => 
-            (regexS.test(register.title) || regexS.test(register.lines.join(" "))) && regex.test(register.author)));
+    ?poeiria(vazio.test(value) ? registers : registers.filter((register) => regex.test(register.author)))
+    :poeiria(vazio.test(value) ? search($search) : registers.filter((register) => 
+        (regexS.test(register.title) || regexS.test(register.lines.join(" "))) && regex.test(register.author)));
+    sessionStorage.setItem("filter", JSON.stringify({search: $search.value, author: value}));
 }
