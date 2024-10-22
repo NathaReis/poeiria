@@ -84,7 +84,7 @@ async function getImage(page=1) {
             const numPages = Math.ceil(media.total_results / media.per_page);
             const prevPage = page === 1 ? numPages : page - 1;
             const nextPage = page === numPages ? 1 : page + 1;
-
+            
             const promises = [
                 fetch(`https://api.pexels.com/v1/search/?locale=pt-BR&page=${prevPage}&per_page=15&query=${$search.value}`, {
                     headers: {
@@ -115,20 +115,18 @@ async function getImage(page=1) {
 }
 
 function renderImage(page='media') {
-    console.log(currentMedia);
-    console.log("\n");
     $images.innerHTML = "";
     
     document.querySelector(".current h6").innerHTML = currentMedia[page].page;
     document.querySelector(".max h6").innerHTML = currentMedia['numPages'];
-
+    
     currentMedia[page].photos.forEach((photo) => {
         const img = document.createElement("img");
         img.src = photo.src.large;
         img.onclick = () => {
             const $imgs = $images.querySelectorAll("img");
             $imgs.forEach((i) => i.classList.remove("focus"));
-
+            
             if(urlImage === img.src) {
                 urlImage = "";
             }
@@ -139,7 +137,7 @@ function renderImage(page='media') {
         }
         $images.appendChild(img);
     })
-
+        
     page !== 'media' ? setCurrentImage(page) : null;
 }
 

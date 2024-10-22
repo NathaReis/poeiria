@@ -145,6 +145,8 @@ main {
                 }
 
                 .controls {
+                    width: 80dvw;
+                    max-width: 540px;                    
                     display: flex;
                     align-items: center;
                     justify-content: space-around;
