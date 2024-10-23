@@ -34,6 +34,16 @@ main {
             font-size: 1.1rem;
             font-family: sans-serif;
             letter-spacing: .5px;
+
+            svg {
+                fill: #fff;
+                width: 40px;
+            }
+
+            span {
+                text-shadow: 0 0 10px #fff4, 0 0 20px #fff6, 0 0 50px #fff7;
+                font-size: .7rem;
+            }
         }
     }
 }
