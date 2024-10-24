@@ -40,3 +40,29 @@ const isLoading = {
         $loadingDiv.classList.add("hidden");
     }
 }
+
+async function logout() {
+    try {
+        isLoading.true();
+        await Poeiria.logout();
+        isLoading.false();
+    }
+    catch (error) {
+        alert(error);
+    }
+}
+
+// Style Header
+const $header = document.querySelector("header");
+let prevScrollpos = window.pageYOffset;
+
+window.onscroll = () => {
+    const currentScrollPos = window.pageYOffset;
+    if(prevScrollpos > currentScrollPos) {
+        $header.classList.remove("header-scroll");
+    }
+    else {
+        $header.classList.add("header-scroll");
+    };
+    prevScrollpos = currentScrollPos;
+}

@@ -29,10 +29,36 @@ const Poeiria = {
     getAll: async () => {
         try {
           const snapshot = await fire.getDocs(collectionPoeiria);
-          return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          const allData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+          // Excluir docs com deletedAt mais antigos que 31 dias
+          const oldData = allData.filter(d => {
+            if(d.deletedAt != null) {
+              const newDate = new Date(d.deletedAt);
+              const currentDay = newDate.getDate();
+              newDate.setDate(currentDay + 30);
+              if((newDate) < new Date()) {
+
+                const docRef = fire.doc(fire.db, collectionName, d.id);
+                return fire.deleteDoc(docRef);
+
+              }
+            }
+          })
+          await Promise.all(oldData);
+
+          return allData.filter(doc => doc.deletedAt == null);
         } catch (error) {
           throw error;
         }
+    },
+    getAllRecycle: async () => {
+      try {
+        const snapshot = await fire.getDocs(collectionPoeiria);
+        return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })).filter(doc => doc.deletedAt != null);
+      } catch (error) {
+        throw error;
+      }
     },
     addDoc: async (data) => {
       try {
@@ -49,10 +75,11 @@ const Poeiria = {
         throw error;
       }
     },
-    deleteDoc: async (docId) => {
+    deleteDoc: async (doc) => {
       try {
-        const docRef = fire.doc(fire.db, collectionName, docId);
-        return await fire.deleteDoc(docRef);
+        const docRef = fire.doc(fire.db, collectionName, doc.id);
+        doc['deletedAt'] = new Date().toDateString();
+        return await fire.setDoc(docRef, doc);
       } catch (error) {
         throw error;
       }
@@ -71,8 +98,15 @@ const Poeiria = {
         await fire.signOut(fire.auth);
       }
       catch (error) {
-        throw error;
+        alert(error);
       }
+    },
+    getMyUID: () => {
+      return new Promise((resolve) => {
+        fire.onAuthStateChanged(fire.auth, (user) => {
+          resolve(user.uid);
+        })
+      })
     }
 }
 window.Poeiria = Poeiria;

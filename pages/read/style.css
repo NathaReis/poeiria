@@ -1,5 +1,9 @@
 @import url(../../main.css);
 
+* {
+    overflow: hidden;
+}
+
 main {
     width: 100dvw;
     height: calc(100dvh - 69px);

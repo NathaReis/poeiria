@@ -8,14 +8,43 @@ let poeiria;
             + poeiria.lines.join("<br><br>") + ' "<br>' + `<span>${poeiria.author}<span>`;
         $box.style = `--url: url(${poeiria.url})`;
     }
+    else {
+        history.back();
+    }
 })()
 
 function deleteData() {
     if(confirm("Deseja excluir Poeiria?")) {
         isLoading.true();
-        Poeiria.deleteDoc(poeiria.id) 
+        Poeiria.deleteDoc(poeiria) 
         .then(() => location = "../home/")
         .catch(alert)
         .finally(() => isLoading.false());
+    }
+}
+
+function clipboard() {
+    if(navigator.clipboard) {    
+        const $clipboards = document.querySelectorAll("#clipboard svg");
+        
+        navigator.clipboard.writeText(`${poeiria.title}\n\n"${poeiria.lines.join("\n")}"\n\n${poeiria.author} | (https://poeiria.vercel.app/pages/home/)`)
+        .then(() => {
+            $clipboards[0].classList.add("hidden");
+            $clipboards[1].classList.remove("hidden");
+        })
+        .catch(() => {
+            $clipboards[0].classList.add("hidden");
+            $clipboards[2].classList.remove("hidden");
+        })
+        .finally(() => {
+            setTimeout(() => {
+                $clipboards[0].classList.remove("hidden");
+                $clipboards[1].classList.add("hidden");
+                $clipboards[2].classList.add("hidden");
+            },1000);
+        })
+    }
+    else {
+        alert("Seu navegador não suporta a API Clipboard.");
     }
 }
