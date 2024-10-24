@@ -12,7 +12,15 @@ $form.oninput = () => {
     $form.submit.disabled = !$form.checkValidity() && $form.password.value.length > 6;
 }
 
-$form.onsubmit = (e) => {
-    e.preventDefault();
-
+$form.onsubmit = async (e) => {
+    try {
+        isLoading.true();
+        e.preventDefault();
+        await Poeiria.login($form.email.value, $form.password.value);
+        location = "../home/";
+    }
+    catch (error) {
+        alert(error);
+    }
+    finally{isLoading.false()}
 }

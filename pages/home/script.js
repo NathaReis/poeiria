@@ -4,10 +4,11 @@ const vazio = /^\s*$/;
 let registers = [];
 let filterSaved;
 
-(() => {
-    isLoading.true();
-    sessionStorage.removeItem("poeiria");
-    Poeiria.getAll().then((data) => {
+async function getAll() {
+    try {
+        isLoading.true();
+        sessionStorage.removeItem("poeiria");
+        const data = await Poeiria.getAll();
         registers = data;
         poeiria(registers);
         author(registers);
@@ -19,10 +20,13 @@ let filterSaved;
             document.querySelector("#author").value = filterSaved.author;
             search(document.querySelector("#search"));
         } 
-    })
-    .catch(alert)
-    .finally(() => isLoading.false())
-})()
+    }
+    catch (error) {
+        console.error(error)
+        alert(error);
+    }
+    finally{isLoading.false()}
+}
 
 function poeiria(data) {
     if(data) {
@@ -88,4 +92,15 @@ const searchAuthor = (element) => {
     :poeiria(vazio.test(value) ? search($search) : registers.filter((register) => 
         (regexS.test(register.title) || regexS.test(register.lines.join(" "))) && regex.test(register.author)));
     sessionStorage.setItem("filter", JSON.stringify({search: $search.value, author: value}));
+}
+
+async function logout() {
+    try {
+        isLoading.true();
+        await Poeiria.logout();
+        isLoading.false();
+    }
+    catch (error) {
+        alert(error);
+    }
 }
