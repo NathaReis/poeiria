@@ -55,6 +55,7 @@ $form.addEventListener("submit", async (e) => {
             !regexUrl.test(urlImage) ? data['url'] = urlImage : null;
             !regexUrl.test($search.value) ? data['search'] = $search.value : !regexUrl.test(urlImage) ? urlImage : null;
         
+            
             if(!poeiriaDados) {
                 data['createdBy'] = uid;
                 data['createdAt'] = (new Date()).toDateString();
@@ -64,8 +65,8 @@ $form.addEventListener("submit", async (e) => {
                 .finally(() => isLoading.false());
             }
             else {
-                data['createdBy'] = poeiriaDados.createdBy;
-                data['createdAt'] = poeiriaDados.createdAt;
+                data['createdBy'] = poeiriaDados.createdBy ? poeiriaDados.createdBy : uid;
+                data['createdAt'] = poeiriaDados.createdAt ? poeiriaDados.createdAt : (new Date()).toDateString();
                 Poeiria.setDoc(poeiriaDados.id, data)
                 .then(() => {
                     sessionStorage.setItem("poeiria", JSON.stringify({id: poeiriaDados.id,...data}));

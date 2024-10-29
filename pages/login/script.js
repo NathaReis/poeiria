@@ -24,3 +24,40 @@ $form.onsubmit = async (e) => {
     }
     finally{isLoading.false()}
 }
+
+const registration = async () => {
+    try {
+        if($form.checkValidity()) {
+            if(confirm(`Deseja criar o usuário: ${$form.email.value}?`)) {
+                isLoading.true();
+                await Poeiria.createUser($form.email.value, $form.password.value);
+                location = "../home/";
+            }
+        }
+        else {
+            alert("Preencha os dados corretamente!");
+        }
+    }
+    catch (error) {
+        alert(error);
+    }
+    finally{isLoading.false()}
+}
+
+const vazio = /^\s*$/; 
+const recoverPassword = async () => {
+    try {
+        if(!vazio.test($form.email.value)) {
+                isLoading.true();
+                await Poeiria.recoverPassword($form.email.value);
+                alert("Confira seu email para criar a nova senha");
+        }
+        else {
+            alert("Preencha o email corretamente!");
+        }
+    }
+    catch (error) {
+        alert(error);
+    }
+    finally{isLoading.false()}
+}

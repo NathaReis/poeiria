@@ -84,6 +84,22 @@ const Poeiria = {
         throw error;
       }
     },
+    createUser: async (email, password) => {
+      try {
+        await fire.createUserWithEmailAndPassword(fire.auth, email, password);
+      }
+      catch (error) {
+        throw error;
+      }
+    },
+    recoverPassword: async (email) => {
+      try {
+        await fire.sendPasswordResetEmail(fire.auth, email);
+      }
+      catch (error) {
+        throw error;
+      }
+    },
     login: async (email, password) => {
       try {
         const userCredential = await fire.signInWithEmailAndPassword(fire.auth, email, password);

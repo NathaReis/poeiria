@@ -16,7 +16,7 @@
         <main>
             <form>
                 <h1 id="slogan">
-                    <img src="../../assets/poeiria.png" alt="">
+                    <img src="../../assets/poeiria.png" alt="*">
                     POEIRIA
                 </h1>
                 <input type="email" name="email" placeholder="Email" required>
@@ -32,10 +32,14 @@
                         <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
                     </svg>
                 </article>
+
+                <a href="#" onclick="registration()">Cadastrar</a>
+                
                 <div class="buttons">
                     <button type="button" style="--color: tomato;" onclick="location = '../home/'">Voltar</button>
                     <button type="submit" name="submit" style="--color: #47ff56;" disabled>Entrar</button>
                 </div>
+                <a href="#" id="recover-password" onclick="recoverPassword()">Recuperar Senha</a>
             </form>
         </main>
 

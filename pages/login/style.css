@@ -23,6 +23,7 @@ form {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    text-align: center;
 
     #slogan {
         font-family: sans-serif;
@@ -52,6 +53,21 @@ form {
         }
     }
 
+    a {
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 1px;
+        font-weight: bold;
+        color: #b9b9b9;
+    }
+
+    a#recover-password {
+        color: #616161;
+    }
+
+    a:hover {
+        opacity: .8;
+    }
+
     .buttons {
         margin: 30px 0;
         display: flex;
@@ -60,6 +76,7 @@ form {
         
         button {
             cursor: pointer;
+            width: 100px;
             height: 40px;
             padding: 10px;
             border-radius: 10px;

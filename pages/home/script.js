@@ -82,7 +82,11 @@ const search = (element) => {
 
 const searchAuthor = (element) => {
     const value = element.value;
-    const regex = new RegExp(value, 'i');    
+    const regex = {
+        test: (valueTest) => {
+            return value === valueTest;
+        }
+    };    
     
     const $search = document.querySelector("#search");
     const regexS = new RegExp($search.value, 'i');
