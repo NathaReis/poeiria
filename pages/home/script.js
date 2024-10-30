@@ -17,12 +17,12 @@ async function getAll() {
         filterSaved = JSON.parse(sessionStorage.getItem("filter"));
         if(filterSaved && (!vazio.test(filterSaved.search) || !vazio.test(filterSaved.author))) {
             document.querySelector("#search").value = filterSaved.search;
-            document.querySelector("#author").value = filterSaved.author;
+            $author.value = filterSaved.author;
             search(document.querySelector("#search"));
         } 
     }
     catch (error) {
-        console.error(error)
+        console.error(error);
         alert(error);
     }
     finally{isLoading.false()}
@@ -32,7 +32,6 @@ function poeiria(data) {
     if(data) {
         $box.innerHTML = '';
     
-        data.sort((a,b) => a.title > b.title ? 1 : -1 );
         data.map((poeiria) => {
             const card = document.createElement("div");
             card.classList.add("card");
@@ -44,7 +43,7 @@ function poeiria(data) {
     
             card.onclick = () => {
                 sessionStorage.setItem("poeiria", JSON.stringify(poeiria));
-                window.location = "../read/";
+                window.location = `../read/index.html?doc=${poeiria.id}`;
             }
     
             card.appendChild(img);

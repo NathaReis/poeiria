@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../assets/poeiria.png" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
-    <script type="module" src="../../services/poeiria.service.js"></script>
-    <script defer src="../../main.js"></script>
-    <script defer src="./script.js"></script>
     <title>POEIRIA</title>
 </head>
 <body>
@@ -28,7 +25,7 @@
                         </a>
                     </li>
                     <li id="edit">
-                        <a href="../read/">
+                        <a onclick="locationDoc()">
                             <svg xmlns="http://www.w3.org/2000/svg" style="--color: #ffba5f" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
                             </svg>
@@ -82,7 +79,7 @@
                         <textarea name="text" id="text" placeholder="Texto" required></textarea>
                         <input type="text" name="title" placeholder="Título" required>
                         <div class="buttons">
-                            <button type="reset" style="--color: tomato;">Cancelar</button>
+                            <button type="reset" style="--color: tomato;">Limpar</button>
                             <button type="submit" name="submit" style="--color: #47ff56;" disabled>Salvar</button>
                         </div>
                     </form>
@@ -116,4 +113,11 @@
 
     </article>
 </body>
+<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore-compat.js"></script>
+<script src="../../services/firebase-init.js"></script>
+<script src="../../services/poeiria.service.js"></script>
+<script src="../../main.js"></script>
+<script src="./script.js"></script>
 </html>

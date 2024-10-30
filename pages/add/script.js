@@ -6,21 +6,29 @@ const vazio = /^\s*$/;
 let urlImage = "";
 let currentMedia = {};
 
-(() => {
-    poeiriaDados = JSON.parse(sessionStorage.getItem("poeiria"));
-
-    if(poeiriaDados) {
-        $form.author.value = poeiriaDados.author;
-        $form.title.value = poeiriaDados.title;
-        $form.text.value = poeiriaDados.lines.join("\n");
-        poeiriaDados.search ? $search.value = poeiriaDados.search : null;
-        poeiriaDados.url ? urlImage = poeiriaDados.url : null;
-        $form.submit.disabled = false;
-        $images.querySelector("img").src = urlImage;
-
-        return document.querySelector("#add").remove();
+(async () => {
+    try {
+        isLoading.true();
+        poeiriaDados = await Poeiria.getDoc();// JSON.parse(sessionStorage.getItem("poeiria"));
+    
+        if(poeiriaDados) {
+            $form.author.value = poeiriaDados.author;
+            $form.title.value = poeiriaDados.title;
+            $form.text.value = poeiriaDados.lines.join("\n");
+            poeiriaDados.search ? $search.value = poeiriaDados.search : null;
+            poeiriaDados.url ? urlImage = poeiriaDados.url : null;
+            $form.submit.disabled = false;
+            $images.querySelector("img").src = urlImage;
+    
+            return document.querySelector("#add").remove();
+        }
+        document.querySelector("#edit").remove();
     }
-    document.querySelector("#edit").remove();
+    catch (error) {
+        console.error(error);
+        document.querySelector("#edit").remove();
+    }
+    finally{isLoading.false()}
 })()
 
 const reset = () => {
@@ -37,52 +45,50 @@ $form.addEventListener("input", () => {
 })
 
 $form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const uid = await Poeiria.getMyUID();
-
-    if(uid) {
-        if((vazio.test(urlImage) && vazio.test($search.value)) || (!vazio.test(urlImage) && !vazio.test($search.value))) {
-            isLoading.true()
-        
-            const data = {
-                updatedAt: (new Date()).toDateString(),
-                deletedAt: null,
-                author: $form.author.value,
-                title: $form.title.value,
-                lines: $form.text.value.split("\n")
-            }
-            const regexUrl = /^\s*$/;
-            !regexUrl.test(urlImage) ? data['url'] = urlImage : null;
-            !regexUrl.test($search.value) ? data['search'] = $search.value : !regexUrl.test(urlImage) ? urlImage : null;
-        
+    try {
+        e.preventDefault();
+        isLoading.true();
+        const uid = await Poeiria.getMyUID();
+    
+        if(uid) {
+            if((vazio.test(urlImage) && vazio.test($search.value)) || (!vazio.test(urlImage) && !vazio.test($search.value))) {
             
-            if(!poeiriaDados) {
-                data['createdBy'] = uid;
-                data['createdAt'] = (new Date()).toDateString();
-                Poeiria.addDoc(data)
-                .then(reset)
-                .catch(alert)
-                .finally(() => isLoading.false());
+                const data = {
+                    updatedAt: (new Date()).toDateString(),
+                    author: $form.author.value,
+                    title: $form.title.value,
+                    lines: $form.text.value.split("\n")
+                }
+                const regexUrl = /^\s*$/;
+                !regexUrl.test(urlImage) ? data['url'] = urlImage : null;
+                !regexUrl.test($search.value) ? data['search'] = $search.value : !regexUrl.test(urlImage) ? urlImage : null;
+            
+                
+                if(!poeiriaDados) {
+                    data['createdBy'] = uid;
+                    data['createdAt'] = (new Date()).toDateString();
+                    await Poeiria.addDoc(data);
+                    reset();
+                }
+                else {
+                    await Poeiria.setDoc(poeiriaDados.id, data);
+                    sessionStorage.setItem("poeiria", JSON.stringify(data));
+                    location = "../read/";
+                }
             }
             else {
-                data['createdBy'] = poeiriaDados.createdBy ? poeiriaDados.createdBy : uid;
-                data['createdAt'] = poeiriaDados.createdAt ? poeiriaDados.createdAt : (new Date()).toDateString();
-                Poeiria.setDoc(poeiriaDados.id, data)
-                .then(() => {
-                    sessionStorage.setItem("poeiria", JSON.stringify({id: poeiriaDados.id,...data}));
-                    location = "../read/";
-                })
-                .catch(alert)
-                .finally(() => isLoading.false());
+                alert("Imagem não reconhecida!");
             }
         }
         else {
-            alert("Imagem não reconhecida!");
+            alert("Usuário não possui permissões necessárias!");
         }
     }
-    else {
-        alert("Usuário não possui permissões necessárias!");
+    catch (error) {
+        console.error(error);
+        alert("Erro registrar o arquivo!");
     }
+    finally{isLoading.false()}
 })
 
 async function getImage(page=1) {
@@ -177,4 +183,9 @@ function page(next) {
             ?renderImage('nextMedia')
             :renderImage('prevMedia');
     }
+}
+
+function locationDoc() {
+    const docId = new URLSearchParams(location.search).get('doc');
+    location = docId ? `../read/index.html?doc=${docId}` : "../home/";
 }
