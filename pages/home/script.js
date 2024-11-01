@@ -7,6 +7,8 @@ let filterSaved;
 async function getAll() {
     try {
         isLoading.true();
+        sessionStorage.removeItem("register");
+
         registers = await Poeiria.getAll();
         poeiria(registers);
         author(registers);
@@ -40,6 +42,7 @@ function poeiria(data) {
             p.innerHTML = `<strong>${poeiria.title}</strong> ${poeiria.lines.join(", ")}`;
     
             card.onclick = () => {
+                sessionStorage.setItem("register", JSON.stringify(poeiria));
                 location = `../read/index.html?doc=${poeiria.uid}`;
             }
     

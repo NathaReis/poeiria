@@ -1,22 +1,24 @@
-let poeiriaDados;
 const $form = document.querySelector("form");
 const $search = document.querySelector("#search");
 const $images = document.querySelector("main #images");
 const vazio = /^\s*$/; 
+let poeiria;
 let urlImage = "";
 let currentMedia = {};
 
 (async () => {
     try {
         isLoading.true();
-        poeiriaDados = await Poeiria.getDoc();// JSON.parse(sessionStorage.getItem("poeiria"));
+        const poeiriaSession = JSON.parse(sessionStorage.getItem("register"));
+        poeiria = poeiriaSession ? poeiriaSession : await Poeiria.getDoc();
+        !poeiriaSession ? sessionStorage.setItem("register", JSON.stringify(poeiria)) : null;
     
-        if(poeiriaDados) {
-            $form.author.value = poeiriaDados.author;
-            $form.title.value = poeiriaDados.title;
-            $form.text.value = poeiriaDados.lines.join("\n");
-            poeiriaDados.search ? $search.value = poeiriaDados.search : null;
-            poeiriaDados.url ? urlImage = poeiriaDados.url : null;
+        if(poeiria) {
+            $form.author.value = poeiria.author;
+            $form.title.value = poeiria.title;
+            $form.text.value = poeiria.lines.join("\n");
+            poeiria.search ? $search.value = poeiria.search : null;
+            poeiria.url ? urlImage = poeiria.url : null;
             $form.submit.disabled = false;
             $images.querySelector("img").src = urlImage;
     
@@ -64,7 +66,7 @@ $form.addEventListener("submit", async (e) => {
                 !regexUrl.test($search.value) ? data['search'] = $search.value : !regexUrl.test(urlImage) ? urlImage : null;
             
                 
-                if(!poeiriaDados) {
+                if(!poeiria) {
                     data['createdBy'] = uid;
                     data['createdAt'] = (new Date()).toDateString();
                     await Poeiria.addDoc(data);

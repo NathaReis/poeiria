@@ -61,25 +61,30 @@ async function exe(query) {
 const Poeiria = {
     getAll: async (recycled=false) => {
       try {
-        let result = [];
-
-        const hash = (await firebase.firestore().collection(collectionName).doc(hashUID).get()).data().hash;
-        const session = JSON.parse(sessionStorage.getItem("registers"));
         const hashSession = sessionStorage.getItem("hash");
+        const session = JSON.parse(sessionStorage.getItem("registers"));
+        let result = [];
+        let hash = (await firebase.firestore().collection(collectionName).doc(hashUID).get()).data().hash;
+
+        const getRegisters = async () => {
+          const snapshot = await firebase.firestore().collection(collectionName).orderBy('title', 'asc').get();
+          return snapshot.docs.map(doc => ({
+            ...doc.data(),
+            uid: doc.id
+          }))
+        }
+
 
         if(session && hash === hashSession) {
           result = session;
         }
         else {
-          const snapshot = await firebase.firestore().collection(collectionName).orderBy('title', 'asc').get();
-          result = snapshot.docs.map(doc => ({
-            ...doc.data(),
-            uid: doc.id
-          }))
-          const hash = (await firebase.firestore().collection(collectionName).doc(hashUID).get()).data().hash;
-          sessionStorage.setItem("hash", hash);
-          sessionStorage.setItem("registers",JSON.stringify(result));
+          result = await getRegisters();
         }
+
+        sessionStorage.setItem("hash", hash);
+        sessionStorage.setItem("registers",JSON.stringify(result));
+        
         const readDoc = [];
         const deletedDoc = [];
         const myUID = await Poeiria.getMyUID();

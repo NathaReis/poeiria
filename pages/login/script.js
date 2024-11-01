@@ -12,8 +12,6 @@ $form.oninput = () => {
     $form.submit.disabled = !$form.checkValidity() && $form.password.value.length > 6;
 }
 
-console.log(Poeiria)
-
 $form.onsubmit = async (e) => {
     try {
         isLoading.true();
