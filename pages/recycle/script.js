@@ -7,8 +7,7 @@ let filterSaved;
 async function getAll() {
     try {
         isLoading.true();
-        const data = await Poeiria.getAllRecycle();
-        registers = data;
+        registers = await Poeiria.getAll(true);
         poeiria(registers);
         author(registers);
         

@@ -1,4 +1,5 @@
 const collectionName = "poeiria";
+const hashUID = "XkqfSqDQado4b8XzAAT0";
 
 firebase.auth().onAuthStateChanged(user =>
 {
@@ -38,7 +39,7 @@ async function hash() {
   for(let i = 0;i < str.length; i++) {
       hash.push(str.charCodeAt(i));
   }
-  await firebase.firestore().collection(collectionName).doc("XkqfSqDQado4b8XzAAT0").update({
+  await firebase.firestore().collection(collectionName).doc(hashUID).update({
     hash: hash.join("")
   });
 }
@@ -58,45 +59,38 @@ async function exe(query) {
 }
 
 const Poeiria = {
-    getAll: async () => {
+    getAll: async (recycled=false) => {
       try {
-        const snapshot = await firebase.firestore().collection(collectionName).orderBy('title', 'asc').get();
-        const result = snapshot.docs.map(doc => ({
-          ...doc.data(),
-          uid: doc.id
-        }))
-        
-        const filter = [];
+        let result = [];
+
+        const hash = (await firebase.firestore().collection(collectionName).doc(hashUID).get()).data().hash;
+        const session = JSON.parse(sessionStorage.getItem("registers"));
+        const hashSession = sessionStorage.getItem("hash");
+
+        if(session && hash === hashSession) {
+          result = session;
+        }
+        else {
+          const snapshot = await firebase.firestore().collection(collectionName).orderBy('title', 'asc').get();
+          result = snapshot.docs.map(doc => ({
+            ...doc.data(),
+            uid: doc.id
+          }))
+          const hash = (await firebase.firestore().collection(collectionName).doc(hashUID).get()).data().hash;
+          sessionStorage.setItem("hash", hash);
+          sessionStorage.setItem("registers",JSON.stringify(result));
+        }
+        const readDoc = [];
+        const deletedDoc = [];
+        const myUID = await Poeiria.getMyUID();
         result.map(async (doc) => {
-          firebase.auth().onAuthStateChanged(user => {
-            doc.deletedAt == null 
-            ?filter.push(doc)
+          doc.deletedAt == null 
+          ?readDoc.push(doc)
+          : doc.createdBy === myUID 
+            ?deletedDoc.push(doc)
             :null;
-          })
         })
-        return filter;
-      }
-      catch (error) {
-        throw formatedError(error);
-      }
-    },
-    getAllRecycle: async () => {
-      try {
-        const snapshot = await firebase.firestore().collection(collectionName).orderBy('title', 'asc').get();
-        const result = snapshot.docs.map(doc => ({
-          ...doc.data(),
-          uid: doc.id
-        }))
-        
-        const filter = [];
-        result.map(async (doc) => {
-          firebase.auth().onAuthStateChanged(user => {
-            doc.createdBy == user.uid && doc.deletedAt !== null 
-            ?filter.push(doc)
-            :null;
-          })
-        })
-        return filter;
+        return recycled ? deletedDoc : readDoc;
       }
       catch (error) {
         throw formatedError(error);
