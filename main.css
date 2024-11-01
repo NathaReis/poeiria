@@ -46,25 +46,26 @@
 }
 
 header.header-scroll {
-    opacity: 0;
-    height: 0px;
+    .box {
+        background-color: #0003;
+        backdrop-filter: blur(15px);
+    }
 }
 
 header {
-    opacity: 1;
     position: sticky;
     top: 0;
     height: 70px;
     width: 100dvw;
     overflow: hidden;
-    transition: .3s;
-
+    
     .box {
         background-color: var(--header);
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 15px;
+        transition: 1s;
 
         #slogan {
             font-family: sans-serif;

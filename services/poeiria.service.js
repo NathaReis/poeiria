@@ -32,6 +32,31 @@ function formatedError(error) {
   return error;
 }
 
+async function hash() {
+  const str = new Date().toISOString()
+  const hash = [];
+  for(let i = 0;i < str.length; i++) {
+      hash.push(str.charCodeAt(i));
+  }
+  await firebase.firestore().collection(collectionName).doc("XkqfSqDQado4b8XzAAT0").update({
+    hash: hash.join("")
+  });
+}
+
+async function exe(query) {
+  try {
+    if(query) {
+      const response = await query;
+      await hash();
+      return response;
+    }
+    throw error;
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
 const Poeiria = {
     getAll: async () => {
       try {
@@ -79,7 +104,7 @@ const Poeiria = {
     },
     addDoc: async (data) => {
       try {
-        return await firebase.firestore().collection(collectionName).add(data);      
+        return await exe(firebase.firestore().collection(collectionName).add(data));      
       } catch (error) {
         throw formatedError(error);
       }
@@ -99,7 +124,7 @@ const Poeiria = {
       try {
         const docId = uid ? uid : new URLSearchParams(location.search).get('doc');
         console.log(docId, newData)
-        return await firebase.firestore().collection(collectionName).doc(docId).update(newData);
+        return await exe(firebase.firestore().collection(collectionName).doc(docId).update(newData));
       }
       catch (error) {
         throw formatedError(error);
@@ -108,9 +133,9 @@ const Poeiria = {
     recycleDoc: async () => {
       try {
         const docId = new URLSearchParams(location.search).get('doc');
-        return await firebase.firestore().collection(collectionName).doc(docId).update({
+        return await exe(firebase.firestore().collection(collectionName).doc(docId).update({
           deletedAt: new Date().toDateString()
-        });
+        }));
       } catch (error) {
         throw formatedError(error);
       }
@@ -118,7 +143,7 @@ const Poeiria = {
     deleteDoc: async () => {
       try {
         const docId = new URLSearchParams(location.search).get('doc');
-        return await firebase.firestore().collection(collectionName).doc(docId).delete();
+        return await exe(firebase.firestore().collection(collectionName).doc(docId).delete());
       } catch (error) {
         throw formatedError(error);
       }
