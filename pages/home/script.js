@@ -7,7 +7,6 @@ let filterSaved;
 async function getAll() {
     try {
         isLoading.true();
-        sessionStorage.removeItem("poeiria");
         const data = await Poeiria.getAll();
         registers = data;
         poeiria(registers);
@@ -42,8 +41,7 @@ function poeiria(data) {
             p.innerHTML = `<strong>${poeiria.title}</strong> ${poeiria.lines.join(", ")}`;
     
             card.onclick = () => {
-                sessionStorage.setItem("poeiria", JSON.stringify(poeiria));
-                window.location = `../read/index.html?doc=${poeiria.id}`;
+                location = `../read/index.html?doc=${poeiria.uid}`;
             }
     
             card.appendChild(img);

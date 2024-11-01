@@ -20,7 +20,6 @@ const createLoading = () => {
     const $html = document.querySelector("html");
     const loadingDiv = document.createElement("div");
     loadingDiv.id = "loading";
-    loadingDiv.classList.add("hidden");
     
     const loading = document.createElement("div");
     loading.classList.add("loader");
@@ -32,12 +31,10 @@ const createLoading = () => {
 const isLoading = {
     true: () => {
         createLoading();
-        const $loadingDiv = document.querySelector("#loading");
-        $loadingDiv.classList.remove("hidden");
     },
     false: () => {
         const $loadingDiv = document.querySelector("#loading");
-        $loadingDiv.classList.add("hidden");
+        $loadingDiv.remove();
     }
 }
 

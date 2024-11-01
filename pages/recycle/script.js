@@ -7,7 +7,6 @@ let filterSaved;
 async function getAll() {
     try {
         isLoading.true();
-        sessionStorage.removeItem("poeiria");
         const data = await Poeiria.getAllRecycle();
         registers = data;
         poeiria(registers);
@@ -43,12 +42,7 @@ function poeiria(data) {
             p.innerHTML = `<strong>${poeiria.title}</strong> ${poeiria.lines.join(", ")}`;
     
             card.onclick = () => {
-                if(confirm(`Deseja restaurar ${poeiria.title}?`)) {
-                   poeiria['deletedAt'] = null;
-                   Poeiria.setDoc(poeiria.id, poeiria)
-                   .then(() => location = "../home/")
-                   .catch(alert); 
-                }
+                location = `../read/index.html?doc=${poeiria.uid}`;
             }
     
             card.appendChild(img);

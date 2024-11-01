@@ -4,12 +4,8 @@ let poeiria;
 
 (async () => {
     try {
-        poeiria = JSON.parse(sessionStorage.getItem("poeiria"));
-        if(!poeiria) {
-            isLoading.true();
-            poeiria = await Poeiria.getDoc();
-            sessionStorage.setItem("poeiria", JSON.stringify(poeiria));
-        }
+        isLoading.true();
+        poeiria = await Poeiria.getDoc();
         
         $box.querySelector("h1").innerHTML = poeiria.title;
         $box.querySelector("p").innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="bi bi-quote" viewBox="0 0 16 16"><path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"/></svg>` 
@@ -19,25 +15,44 @@ let poeiria;
         $isMyAccount.forEach(async (item) => {
             const uid = await Poeiria.getMyUID();
             if(uid === poeiria.createdBy) {
-                item.classList.remove("hidden");
+                if(item.id !== "restore") {
+                    item.classList.remove("hidden");
+                }
             }
         })
+
+        if(poeiria.deletedAt != null) {
+            const notRestore = document.querySelectorAll(".notRestore");
+            notRestore.forEach(n => n.remove());
+            document.querySelector("#restore").classList.remove("hidden");
+        }
     }
     catch (error) {
-        console.error(error);
         alert("Arquivo não encontrado!");
     }
     finally{isLoading.false()}
 })()
 
-function deleteData() {
-    if(confirm("Deseja excluir Poeiria?")) {
+async function deleteData() {
+    try {
         isLoading.true();
-        Poeiria.recycleDoc() 
-        .then(() => location = "../home/")
-        .catch(alert)
-        .finally(() => isLoading.false());
+        if(poeiria.deletedAt == null) {
+            if(confirm("Deseja excluir Poeiria?")) {
+                await Poeiria.recycleDoc() 
+                location = "../home/";
+            }
+        }
+        else {
+            if(confirm("Deseja excluir PERMANENTEMENTE Poeiria?")) {
+                await Poeiria.deleteDoc();
+                location = "../recycle/";
+            }
+        }
     }
+    catch (error) {
+        alert(error);
+    }
+    finally{isLoading.false()}
 }
 
 function clipboard() {
@@ -69,4 +84,19 @@ function clipboard() {
 function locationDoc() {
     const docId = new URLSearchParams(location.search).get('doc');
     location = docId ? `../add/index.html?doc=${docId}` : "../add/";
+}
+
+async function restore() {
+    try {
+        isLoading.true();
+        if(confirm(`Deseja restaurar ${poeiria.title}?`)) {
+           poeiria['deletedAt'] = null;
+           await Poeiria.setDoc(poeiria, poeiria.uid);
+           location = "../recycle/";
+        }
+    }
+    catch (error) {
+        alert(error);
+    }
+    finally{isLoading.false()}
 }

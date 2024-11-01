@@ -71,9 +71,9 @@ $form.addEventListener("submit", async (e) => {
                     reset();
                 }
                 else {
-                    await Poeiria.setDoc(poeiriaDados.id, data);
-                    sessionStorage.setItem("poeiria", JSON.stringify(data));
-                    location = "../read/";
+                    await Poeiria.setDoc(data);
+                    const docId = new URLSearchParams(location.search).get('doc');
+                    location = `../read/index.html?doc=${docId}`;
                 }
             }
             else {

@@ -27,6 +27,11 @@ firebase.auth().onAuthStateChanged(user =>
   }
 })
 
+function formatedError(error) {
+  console.error(`Failed: ${error}`);
+  return error;
+}
+
 const Poeiria = {
     getAll: async () => {
       try {
@@ -47,7 +52,7 @@ const Poeiria = {
         return filter;
       }
       catch (error) {
-        throw error;
+        throw formatedError(error);
       }
     },
     getAllRecycle: async () => {
@@ -69,14 +74,14 @@ const Poeiria = {
         return filter;
       }
       catch (error) {
-        throw error;
+        throw formatedError(error);
       }
     },
     addDoc: async (data) => {
       try {
-        return await firebase.firestore().collection(collectionName).doc().add(data);      
+        return await firebase.firestore().collection(collectionName).add(data);      
       } catch (error) {
-        throw error;
+        throw formatedError(error);
       }
     },
     getDoc: async () => {
@@ -87,15 +92,17 @@ const Poeiria = {
         return info;
       }
       catch (error) {
-        throw error;
+        throw formatedError(error);
       }
     },
-    setDoc: async (docId, newData) => {
+    setDoc: async (newData, uid=false) => {
       try {
+        const docId = uid ? uid : new URLSearchParams(location.search).get('doc');
+        console.log(docId, newData)
         return await firebase.firestore().collection(collectionName).doc(docId).update(newData);
       }
       catch (error) {
-        throw error;
+        throw formatedError(error);
       }
     },
     recycleDoc: async () => {
@@ -105,42 +112,47 @@ const Poeiria = {
           deletedAt: new Date().toDateString()
         });
       } catch (error) {
-        throw error;
+        throw formatedError(error);
       }
     },
-    // createUser: async (email, password) => {
-    //   try {
-    //     await fire.createUserWithEmailAndPassword(fire.auth, email, password);
-    //   }
-    //   catch (error) {
-    //     throw error;
-    //   }
-    // },
-    // recoverPassword: async (email) => {
-    //   try {
-    //     await fire.sendPasswordResetEmail(fire.auth, email);
-    //   }
-    //   catch (error) {
-    //     throw error;
-    //   }
-    // },
-    // login: async (email, password) => {
-    //   try {
-    //     const userCredential = await fire.signInWithEmailAndPassword(fire.auth, email, password);
-    //     return userCredential.user;
-    //   }
-    //   catch (error) {
-    //     throw error;
-    //   }
-    // },
-    // logout: async () => {
-    //   try {
-    //     await fire.signOut(fire.auth);
-    //   }
-    //   catch (error) {
-    //     alert(error);
-    //   }
-    // },
+    deleteDoc: async () => {
+      try {
+        const docId = new URLSearchParams(location.search).get('doc');
+        return await firebase.firestore().collection(collectionName).doc(docId).delete();
+      } catch (error) {
+        throw formatedError(error);
+      }
+    },
+    createUser: async (email, password) => {
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+      }
+      catch (error) {
+        throw formatedError(error);
+      }
+    },
+    recoverPassword: async (email) => {
+      try {
+        await firebase.sendPasswordResetEmail(email);
+      }
+      catch (error) {
+        throw formatedError(error);
+      }
+    },
+    login: async (email, password) => {
+      try {
+        await firebase.auth().signInWithEmailAndPassword(email, password);        
+      } catch (error) {
+        throw formatedError(error); 
+      }
+    },
+    logout: async () => {
+      try {
+        await firebase.auth().signOut();        
+      } catch (error) {
+        throw formatedError(error); 
+      }
+    },
     getMyUID: () => {
       return new Promise((resolve) => {
         firebase.auth().onAuthStateChanged(user => {
