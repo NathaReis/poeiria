@@ -61,7 +61,7 @@ function clipboard() {
     if(navigator.clipboard) {    
         const $clipboards = document.querySelectorAll("#clipboard svg");
         
-        navigator.clipboard.writeText(`${poeiria.title}\n\n"${poeiria.lines.join("\n")}"\n\n${poeiria.author} | (https://poeiria.vercel.app/pages/home/)`)
+        navigator.clipboard.writeText(`${poeiria.title}\n\n"${poeiria.lines.join("\n")}"\n\n${poeiria.author} | (https://poeiria.vercel.app/pages/read/index.html?doc=${poeiria.uid})`)
         .then(() => {
             $clipboards[0].classList.add("hidden");
             $clipboards[1].classList.remove("hidden");
