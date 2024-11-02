@@ -180,7 +180,9 @@ const Poeiria = {
     getMyUID: () => {
       return new Promise((resolve) => {
         firebase.auth().onAuthStateChanged(user => {
-          resolve(user.uid);
+          if(user) {
+            resolve(user.uid);
+          }
         })
       })
     }
