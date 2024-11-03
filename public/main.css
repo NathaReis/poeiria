@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    overflow: hidden auto;
 }
 
 :root {
@@ -144,36 +145,6 @@ select {
     display: grid;
     align-items: center;
     justify-content: center;
-}
-
-/* HTML: <div class="loader"></div> */
-.loader {
-    display: inline-grid;
-    width: 60px;
-    aspect-ratio: 1;
-}
-.loader:before,
-.loader:after {
-    content:"";
-    grid-area: 1/1;
-    border-radius: 50%;
-    background: repeating-conic-gradient(#C02942 0 60deg,#0B486B 0 120deg);
-    animation: l7 2s infinite alternate ease-in-out;
-    rotate: 90deg;
-    filter: drop-shadow(0 0 20px #ffffff60);
-}
-.loader:before {
-    translate: 0 -100%;
-}
-.loader:after {
-    padding: 20%;
-    mask:conic-gradient(from 120deg,#0000 120deg,#000 0) content-box exclude,conic-gradient(from 120deg,#0000 120deg,#000 0);
-    animation-direction: alternate-reverse;
-}
-@keyframes l7 {
-    to {
-        rotate: -90deg;
-    }
 }
 
 .hidden {
