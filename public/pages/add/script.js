@@ -74,6 +74,7 @@ $form.addEventListener("submit", async (e) => {
                 }
                 else {
                     await Poeiria.setDoc(data);
+                    sessionStorage.removeItem("register");
                     const docId = new URLSearchParams(location.search).get('doc');
                     location = `../read/index.html?doc=${docId}`;
                 }
