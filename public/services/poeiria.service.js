@@ -61,34 +61,37 @@ async function exe(query) {
 const Poeiria = {
     getAll: async (recycled=false) => {
       try {
-        const hashSession = sessionStorage.getItem("hash");
-        const session = JSON.parse(sessionStorage.getItem("registers"));
-        let result = [];
+        const hashLocal = localStorage.getItem("hash");
+        const local = JSON.parse(localStorage.getItem("registers"));
+        let docs = [];
         let hash = (await firebase.firestore().collection(collectionName).doc(hashUID).get()).data().hash;
-        if(session && hash === hashSession) {
-          result = session;
+        if(local && hash === hashLocal) {
+          docs = local;
         }
         else {
           const snapshot = await firebase.firestore().collection(collectionName).orderBy('title', 'asc').get();
-          result = snapshot.docs.map(doc => ({
+          docs = snapshot.docs.map(doc => ({
             ...doc.data(),
             uid: doc.id
           }));
         }
 
-        sessionStorage.setItem("hash", hash);
-        sessionStorage.setItem("registers",JSON.stringify(result));
+        localStorage.setItem("hash", hash);
+        localStorage.setItem("registers",JSON.stringify(docs));
         
         const readDoc = [];
         const deletedDoc = [];
-        const myUID = await Poeiria.getMyUID();
-        result.map(async (doc) => {
-          doc.deletedAt == null 
-          ?readDoc.push(doc)
-          : doc.createdBy === myUID 
-            ?deletedDoc.push(doc)
-            :null;
-        })
+        for(let doc of docs) {
+          if(doc.deletedAt == null) {
+            readDoc.push(doc);
+          }
+          else {
+            const myUID = await Poeiria.getMyUID();
+            if(doc.createdBy === myUID) {
+              deletedDoc.push(doc);
+            }
+          }
+        }
         return recycled ? deletedDoc : readDoc;
       }
       catch (error) {
@@ -116,7 +119,6 @@ const Poeiria = {
     setDoc: async (newData, uid=false) => {
       try {
         const docId = uid ? uid : new URLSearchParams(location.search).get('doc');
-        console.log(docId, newData)
         return await exe(firebase.firestore().collection(collectionName).doc(docId).update(newData));
       }
       catch (error) {

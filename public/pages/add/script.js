@@ -95,6 +95,7 @@ $form.addEventListener("submit", async (e) => {
 
 async function getImage(page=1) {
     try {
+        isLoading.true();
         if(!vazio.test($search.value)) {
             const result = await fetch(`https://api.pexels.com/v1/search/?locale=pt-BR&page=${page}&per_page=15&query=${$search.value}`, {
                 headers: {
@@ -133,6 +134,12 @@ async function getImage(page=1) {
     }
     catch (error) {
         alert(error);
+    }
+    finally{isLoading.false()}
+}
+$search.onkeydown = (event) => {
+    if(event.key === 'Enter') {
+        getImage();
     }
 }
 

@@ -39,13 +39,13 @@ async function deleteData() {
     try {
         isLoading.true();
         if(poeiria.deletedAt == null) {
-            if(confirm("Deseja excluir Poeiria?")) {
+            if(confirm("Deseja excluir o texto?")) {
                 await Poeiria.recycleDoc() 
                 location = "../home/";
             }
         }
         else {
-            if(confirm("Deseja excluir PERMANENTEMENTE Poeiria?")) {
+            if(confirm("Excluir PERMANENTEMENTE?")) {
                 await Poeiria.deleteDoc();
                 location = "../recycle/";
             }
