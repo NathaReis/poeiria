@@ -119,6 +119,21 @@ header {
     }
 }
 
+@media (max-width: 620px) {
+    header {
+        overflow: auto;
+        .box {
+            menu {
+                width: 200px;
+
+                li a svg {
+                    width: 20px;
+                }
+            }
+        }
+    }
+}
+
 main {
     margin-top: 70px;
 }
