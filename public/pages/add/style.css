@@ -85,20 +85,13 @@ main {
                     }
                     
                     button:hover {
-                        color: #fff;
                         border: .5px solid var(--color);
-                        background-color: var(--color);
+                        color: var(--color);
                     }
                     
                     button:disabled {
                         cursor: not-allowed;
                         opacity: .9;
-                    }
-                    
-                    button:disabled:hover {
-                        color: #fff;
-                        border: .5px solid var(--color);
-                        background-color: #000;
                     }
                 }
             }

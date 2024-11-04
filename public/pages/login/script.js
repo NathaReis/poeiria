@@ -17,7 +17,7 @@ $form.onsubmit = async (e) => {
         isLoading.true();
         e.preventDefault();
         await Poeiria.login($form.email.value, $form.password.value);
-        location = "../home/";
+        location = "../home/index.html";
     }
     catch (error) {
         alert(error);
@@ -31,7 +31,7 @@ const registration = async () => {
             if(confirm(`Deseja criar o usuário: ${$form.email.value}?`)) {
                 isLoading.true();
                 await Poeiria.createUser($form.email.value, $form.password.value);
-                location = "../home/";
+                location = "../home/index.html";
             }
         }
         else {

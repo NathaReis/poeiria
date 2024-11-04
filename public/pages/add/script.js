@@ -197,5 +197,5 @@ function page(next) {
 
 function locationDoc() {
     const docId = new URLSearchParams(location.search).get('doc');
-    location = docId ? `../read/index.html?doc=${docId}` : "../home/";
+    location = docId ? `../read/index.html?doc=${docId}` : "../home/index.html";
 }

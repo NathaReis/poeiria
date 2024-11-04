@@ -54,18 +54,16 @@ header.header-scroll {
 }
 
 header {
-    position: sticky;
-    top: 0;
-    height: 70px;
+    position: fixed;
     width: 100dvw;
     overflow: hidden;
-    
+
     .box {
         background-color: var(--header);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 15px;
+        padding: 20px 15px 0;
         transition: 1s;
 
         #slogan {
@@ -111,6 +109,10 @@ header {
             }
         }
     }
+}
+
+main {
+    margin-top: 70px;
 }
 
 input, textarea, select {

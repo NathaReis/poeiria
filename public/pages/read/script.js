@@ -41,13 +41,13 @@ async function deleteData() {
         if(poeiria.deletedAt == null) {
             if(confirm("Deseja excluir o texto?")) {
                 await Poeiria.recycleDoc() 
-                location = "../home/";
+                location = "../home/index.html";
             }
         }
         else {
             if(confirm("Excluir PERMANENTEMENTE?")) {
                 await Poeiria.deleteDoc();
-                location = "../recycle/";
+                location = "../recycle/index.html";
             }
         }
     }
@@ -85,7 +85,7 @@ function clipboard() {
 
 function locationDoc() {
     const docId = new URLSearchParams(location.search).get('doc');
-    location = docId ? `../add/index.html?doc=${docId}` : "../add/";
+    location = docId ? `../add/index.html?doc=${docId}` : "../add/index.html";
 }
 
 async function restore() {
@@ -94,7 +94,7 @@ async function restore() {
         if(confirm(`Deseja restaurar ${poeiria.title}?`)) {
            poeiria['deletedAt'] = null;
            await Poeiria.setDoc(poeiria, poeiria.uid);
-           location = "../recycle/";
+           location = "../recycle/index.html";
         }
     }
     catch (error) {
