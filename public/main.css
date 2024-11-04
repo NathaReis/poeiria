@@ -16,6 +16,8 @@
     --svgBGH: #0d0d0d;
     --txt: #fff;
     --txtI: #383838;
+    --transparent: #fff1;
+    --shadow: 0 0 10px #fff1;
 }
 
 .light:root {
@@ -30,6 +32,8 @@
     --scrollBG: #eee;
     --txt: #000;
     --txtI: #a0a0a0;
+    --transparent: #0001;
+    --shadow: 0 0 10px #0001;
 }
 
 .container {
@@ -52,7 +56,7 @@ a {
 
 header.header-scroll {
     .box {
-        background-color: #0003;
+        background-color: var(--transparent);
         backdrop-filter: blur(15px);
     }
 }
