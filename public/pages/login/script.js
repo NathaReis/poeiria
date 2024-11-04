@@ -7,6 +7,17 @@ $eyes.forEach((eye) => {
     }
 })
 
+const validState = async () => {
+    try {
+        const uid = await Poeiria.getMyUID();
+        if(uid !== '') location = "../home/index.html";
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+validState();
+
 const $form = document.querySelector("form");
 $form.oninput = () => {
     $form.submit.disabled = !$form.checkValidity() && $form.password.value.length > 6;
@@ -60,4 +71,9 @@ const recoverPassword = async () => {
         alert(error);
     }
     finally{isLoading.false()}
+}
+
+const $loginGoogle = document.querySelector("#loginGoogle");
+$loginGoogle.onclick = () => {
+    Poeiria.loginG();
 }

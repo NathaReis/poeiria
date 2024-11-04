@@ -201,5 +201,15 @@ const Poeiria = {
             resolve(user ? user.uid : '');
         })
       })
+    },
+    loginG: async () => {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        await firebase.auth().signInWithPopup(provider);
+        location = "../home/index.html";
+      }
+      catch (error) {
+        throw formatedError(error);
+      }
     }
 }

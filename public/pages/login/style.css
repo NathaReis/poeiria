@@ -9,7 +9,7 @@
 main {
     width: 75dvw;
     max-width: 300px;
-    padding: 20px;
+    padding: 20px 25px;
     background-color: #1d1d1d;
     display: grid;
     align-items: center;
@@ -34,21 +34,27 @@ form {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 2px;
 
         img {
             width: 70px;
         }
     }
 
-    #password-box {
+    article {
+        border-radius: 0;
+        background-color: rgb(226, 196, 131);
+        font-size: 1rem;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
 
         svg {
             width: 30px;
-            fill: #fff;
+            fill: var(--inputBG);
+            margin: 10px;
+        }
+
+        svg.eye {
             cursor: pointer;
         }
     }
@@ -80,8 +86,8 @@ form {
             height: 40px;
             padding: 10px;
             border-radius: 10px;
-            border: .5px solid #fff;
             background-color: #000;
+            border: none;
             color: #fff;
             outline: none;
             font-size: 1rem;
@@ -90,13 +96,38 @@ form {
         }
         
         button:hover {
-            border: .5px solid var(--color);
             color: var(--color);
         }
         
         button:disabled {
             cursor: not-allowed;
-            opacity: .9;
+            opacity: .3;
         }
     }
+
+    button#loginGoogle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        margin: 20px 0 0;
+        gap: 20px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+
+        svg {
+            width: 30px;
+        }
+    }
+}
+
+input {
+    height: 40px;
+    padding: 10px;
+    border-radius: 0 10px 10px 0;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    margin: 0;
 }
