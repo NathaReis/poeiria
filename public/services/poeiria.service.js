@@ -28,11 +28,6 @@ firebase.auth().onAuthStateChanged(user =>
   }
 })
 
-function formatedError(error) {
-  console.error(`Failed: ${error}`);
-  return error;
-}
-
 async function hash() {
   const str = new Date().toISOString()
   const hash = [];
@@ -55,6 +50,33 @@ async function exe(query) {
   }
   catch (error) {
     throw error;
+  }
+} 
+
+function formatedError(error) {
+  switch(error.code) {
+    case 'auth/invalid-login-credentials':
+      throw 'Credenciais inválidas';
+    case 'auth/user-not-found':
+      throw 'Usuário não encontrado';
+    case 'auth/weak-password':
+      throw 'Senha muito fraca';
+    case 'auth/invalid-email':
+      throw 'Email inválido';
+    case 'permission-denied':
+      throw 'Permissão negada';
+    case 'not-found':
+      throw 'Documento não encontrado';
+    case 'invalid-argument':
+      throw 'Argumento inválido';
+    case 'function-not-found':
+      throw 'Função não encontrada';
+    case 'permission-denied':
+      throw 'Permissão negada';
+    case 'timeout':
+      throw 'Tempo limite excedido';
+    default:
+      throw error;
   }
 }
 

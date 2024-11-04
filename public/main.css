@@ -46,6 +46,10 @@
     background-color: var(--scrollCL);
 }
 
+a {
+    cursor: pointer;
+}
+
 header.header-scroll {
     .box {
         background-color: #0003;

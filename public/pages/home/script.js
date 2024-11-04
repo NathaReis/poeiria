@@ -1,5 +1,6 @@
 const $box = document.querySelector("#cards");
 const $author = document.querySelector("#author");
+const $search = document.querySelector("#search");
 const vazio = /^\s*$/; 
 let registers = [];
 let filterSaved;
@@ -16,9 +17,9 @@ async function getAll() {
         // Filter
         filterSaved = JSON.parse(sessionStorage.getItem("filter"));
         if(filterSaved && (!vazio.test(filterSaved.search) || !vazio.test(filterSaved.author))) {
-            document.querySelector("#search").value = filterSaved.search;
+            $search.value = filterSaved.search;
             $author.value = filterSaved.author;
-            search(document.querySelector("#search"));
+            search($search);
         } 
     }
     catch (error) {
@@ -87,7 +88,7 @@ const searchAuthor = (element) => {
         }
     };    
     
-    const $search = document.querySelector("#search");
+    const $search = $search;
     const regexS = new RegExp($search.value, 'i');
     
     vazio.test($search.value) 
