@@ -33,7 +33,7 @@ async function getAll() {
     }
     catch (error) {
         console.error(error);
-        alert(error);
+        openDialog.alert(error);
     }
     finally{isLoading.false()}
 }

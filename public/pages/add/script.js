@@ -80,16 +80,16 @@ $form.addEventListener("submit", async (e) => {
                 }
             }
             else {
-                alert("Imagem não reconhecida!");
+                openDialog.alert("Imagem não reconhecida!");
             }
         }
         else {
-            alert("Usuário não possui permissões necessárias!");
+            openDialog.alert("Usuário não possui as permissões!");
         }
     }
     catch (error) {
         console.error(error);
-        alert("Erro registrar o arquivo!");
+        openDialog.alert("Erro registrar o arquivo!");
     }
     finally{isLoading.false()}
 })
@@ -134,7 +134,7 @@ async function getImage(page=1) {
         }
     }
     catch (error) {
-        alert(error);
+        openDialog.alert("Imagem", error);
     }
     finally{isLoading.false()}
 }

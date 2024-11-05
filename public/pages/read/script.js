@@ -30,7 +30,7 @@ let poeiria;
         }
     }
     catch (error) {
-        alert("Arquivo não encontrado!");
+        openDialog.alert("Arquivo não encontrado!");
     }
     finally{isLoading.false()}
 })()
@@ -39,20 +39,22 @@ async function deleteData() {
     try {
         isLoading.true();
         if(poeiria.deletedAt == null) {
-            if(confirm("Deseja excluir o texto?")) {
+            const response = await openDialog.confirm("Deseja excluir o texto?");
+            if(response) {
                 await Poeiria.recycleDoc() 
                 location = "../home/index.html";
             }
         }
         else {
-            if(confirm("Excluir PERMANENTEMENTE?")) {
+            const response = await openDialog.confirm("Excluir PERMANENTEMENTE?");
+            if(response) {
                 await Poeiria.deleteDoc();
                 location = "../recycle/index.html";
             }
         }
     }
     catch (error) {
-        alert(error);
+        openDialog.alert("Delete", error);
     }
     finally{isLoading.false()}
 }
@@ -79,7 +81,7 @@ function clipboard() {
         })
     }
     else {
-        alert("Seu navegador não suporta a API Clipboard.");
+        openDialog.alert("Cópia", "Seu navegador não suporta a API Clipboard.");
     }
 }
 
@@ -91,14 +93,15 @@ function locationDoc() {
 async function restore() {
     try {
         isLoading.true();
-        if(confirm(`Deseja restaurar ${poeiria.title}?`)) {
+        const response = await openDialog.confirm(`Deseja restaurar ${poeiria.title}?`);
+        if(response) {
            poeiria['deletedAt'] = null;
            await Poeiria.setDoc(poeiria, poeiria.uid);
            location = "../recycle/index.html";
         }
     }
     catch (error) {
-        alert(error);
+        openDialog.alert("Restaurar", error);
     }
     finally{isLoading.false()}
 }

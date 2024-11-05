@@ -172,10 +172,15 @@ dialog {
     border: none;
     z-index: 1000;
 
+    article {
+        width: inherit;
+        height: inherit;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+    }
+
     .box {
-        position: absolute;
-        top: calc(50dvh - 150px);
-        left: calc(50dvw - 150px);
         width: 80dvw;
         max-width: 300px;
         height: 300px;

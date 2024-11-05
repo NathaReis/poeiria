@@ -51,7 +51,7 @@ const registration = async () => {
         }
     }
     catch (error) {
-        openDialog.alert("Cadastro", error);
+        openDialog.alert(error);
     }
     finally{isLoading.false()}
 }

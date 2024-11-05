@@ -21,7 +21,7 @@ async function getAll() {
     }
     catch (error) {
         console.error(error)
-        alert(error);
+        openDialog.alert("Busca", error);
     }
     finally{isLoading.false()}
 }

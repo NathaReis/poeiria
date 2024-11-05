@@ -50,7 +50,7 @@ async function logout() {
         isLoading.false();
     }
     catch (error) {
-        alert(error);
+        openDialog.alert("LOGIN", error);
     }
 }
 
@@ -72,14 +72,16 @@ window.onscroll = () => {
 // DIALOG
 document.querySelector("body").innerHTML += `
     <dialog>
-        <div class="box">
-            <h1></h1>
-            <p></p>
-            <div class="buttons">
-                <button type="button" style="--color: tomato;" onclick="closeDialog(false)">Cancelar</button>
-                <button type="button" style="--color: blue;" onclick="closeDialog(true)">Ok</button>
+        <article>
+            <div class="box">
+                <h1></h1>
+                <p></p>
+                <div class="buttons">
+                    <button type="button" style="--color: tomato;" onclick="closeDialog(false)">Cancelar</button>
+                    <button type="button" style="--color: blue;" onclick="closeDialog(true)">Ok</button>
+                </div>
             </div>
-        </div>
+        </article>
     </dialog>`
     
 const $dialog = document.querySelector("dialog");
