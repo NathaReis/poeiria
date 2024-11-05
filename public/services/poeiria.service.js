@@ -57,24 +57,37 @@ function formatedError(error) {
   switch(error.code) {
     case 'auth/invalid-login-credentials':
       throw 'Credenciais inválidas';
+
     case 'auth/user-not-found':
       throw 'Usuário não encontrado';
+
     case 'auth/weak-password':
       throw 'Senha muito fraca';
+
     case 'auth/invalid-email':
       throw 'Email inválido';
+
     case 'permission-denied':
       throw 'Permissão negada';
+
     case 'not-found':
       throw 'Documento não encontrado';
+
     case 'invalid-argument':
       throw 'Argumento inválido';
+
     case 'function-not-found':
       throw 'Função não encontrada';
+
     case 'permission-denied':
       throw 'Permissão negada';
+
     case 'timeout':
       throw 'Tempo limite excedido';
+
+    case 'auth/password-does-not-meet-requirements':
+      throw 'Requerido 6 dígitos e no mínimo um caractere: maiúsculo, minúsculo, numérico e especial'
+
     default:
       throw error;
   }

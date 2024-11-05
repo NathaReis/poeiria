@@ -31,7 +31,7 @@ $form.onsubmit = async (e) => {
         location = "../home/index.html";
     }
     catch (error) {
-        alert(error);
+        openDialog.alert(error);
     }
     finally{isLoading.false()}
 }
@@ -39,18 +39,19 @@ $form.onsubmit = async (e) => {
 const registration = async () => {
     try {
         if($form.checkValidity()) {
-            if(confirm(`Deseja criar ${$form.email.value} com a senha digitada?`)) {
-                isLoading.true();
+            isLoading.true();
+            const response = await openDialog.confirm("Criar conta",`Deseja criar ${$form.email.value} com a senha digitada?`);
+            if(response) {
                 await Poeiria.createUser($form.email.value, $form.password.value);
                 location = "../home/index.html";
             }
         }
         else {
-            alert("Preencha os dados corretamente!");
+            openDialog.alert("Cadastro", "Preencha os dados corretamente!");
         }
     }
     catch (error) {
-        alert(error);
+        openDialog.alert("Cadastro", error);
     }
     finally{isLoading.false()}
 }
@@ -61,14 +62,14 @@ const recoverPassword = async () => {
         if(!vazio.test($form.email.value)) {
                 isLoading.true();
                 await Poeiria.recoverPassword($form.email.value);
-                alert("Confira seu email para criar a nova senha");
+                openDialog.alert("Redefinição de Senha", "Confira seu email para criar a nova senha");
         }
         else {
-            alert("Preencha o email corretamente!");
+            openDialog.alert("Preencha o email corretamente!");
         }
     }
     catch (error) {
-        alert(error);
+        openDialog.alert(error);
     }
     finally{isLoading.false()}
 }
@@ -76,4 +77,8 @@ const recoverPassword = async () => {
 const $loginGoogle = document.querySelector("#loginGoogle");
 $loginGoogle.onclick = () => {
     Poeiria.loginG();
+}
+
+if(localStorage.getItem("isAndroid")) {
+    $loginGoogle.classList.add("hidden");
 }
