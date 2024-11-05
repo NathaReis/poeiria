@@ -175,7 +175,7 @@ const Poeiria = {
     },
     recoverPassword: async (email) => {
       try {
-        await firebase.sendPasswordResetEmail(email);
+        await firebase.auth().sendPasswordResetEmail(email);
       }
       catch (error) {
         throw formatedError(error);

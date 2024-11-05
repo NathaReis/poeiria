@@ -14,6 +14,11 @@ const theme = (element) => {
     if(localStorage.getItem("theme") === 'light') {
         theme($theme);
     }
+
+    const $boxHeader = document.querySelector("header .box");
+    if(localStorage.getItem("isAndroid")) {
+        $boxHeader.classList.add("padding");
+    }
 })()
 
 const createLoading = () => {

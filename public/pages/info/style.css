@@ -1,16 +1,30 @@
 @import url(../../main.css);
 
 main {
+    position: relative;
     width: 100dvw;
     height: calc(100dvh - 70px);
     display: grid;
     align-items: center;
     justify-content: center;
 
+    #ball {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: url(../../assets/info.jpeg);
+        background-attachment: fixed;
+        background-size: cover;
+        filter: brightness(50%);
+        z-index: 1;
+    }
+
     .box {
+        z-index: 2;
         width: 80dvw;
         max-width: 500px;
-        background: linear-gradient(90deg, #000000cb, #0000002f), url(https://images.pexels.com/photos/2029968/pexels-photo-2029968.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+        background: linear-gradient(90deg, #000000cb, #0000002f), url(../../assets/info.jpeg);
         background-size: cover;
         background-position: center;
         color: #fff;

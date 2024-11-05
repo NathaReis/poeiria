@@ -98,7 +98,7 @@ async function getImage(page=1) {
     try {
         isLoading.true();
         if(!vazio.test($search.value)) {
-            const result = await fetch(`https://api.pexels.com/v1/search/?locale=pt-BR&page=${page}&per_page=15&query=${$search.value}`, {
+            const result = await fetch(`https://api.pexels.com/v1/search/?locale=pt-BR&page=${page}&per_page=16&query=${$search.value}`, {
                 headers: {
                     Authorization: "Tjv2x3OIQnFfuvJtPWnXMmlZbfHKBPfoSvOwboq7Hckk5VwIptQY22gs"
                 }

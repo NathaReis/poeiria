@@ -39,7 +39,7 @@ $form.onsubmit = async (e) => {
 const registration = async () => {
     try {
         if($form.checkValidity()) {
-            if(confirm(`Deseja criar o usuário: ${$form.email.value}?`)) {
+            if(confirm(`Deseja criar ${$form.email.value} com a senha digitada?`)) {
                 isLoading.true();
                 await Poeiria.createUser($form.email.value, $form.password.value);
                 location = "../home/index.html";

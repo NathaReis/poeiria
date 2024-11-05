@@ -71,7 +71,7 @@ header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 20px 15px 0;
+        padding: 0 15px 0;
         transition: 1s;
 
         #slogan {
@@ -178,4 +178,8 @@ select {
 
 .rotate {
     transform: rotateZ(180deg);
+}
+
+.padding {
+    padding: 20px 15px 0 !important;
 }

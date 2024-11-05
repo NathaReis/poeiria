@@ -12,7 +12,7 @@
 
         <header>
             <div class="box">
-                <h1 id="slogan" onclick="location = './'">
+                <h1 id="slogan" onclick="location = '../home/index.html'">
                     <img src="../../assets/poeiria.png" alt="">
                     POEIRIA
                 </h1>
@@ -91,7 +91,8 @@
                         <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
                     </svg>
                 </article>
-
+                <a id="recover-password" onclick="recoverPassword()">Recuperar Senha</a>
+                
                 <button type="button" id="loginGoogle">
                     Login com Google
                     <svg xmlns="http://www.w3.org/2000/svg" fill="tomato" class="bi bi-google" viewBox="0 0 16 16">
@@ -99,13 +100,16 @@
                     </svg>
                 </button>
 
-                <a onclick="registration()">Cadastrar</a>
-                
                 <div class="buttons">
-                    <button type="button" style="--color: tomato;" onclick="location = '../home/'">Voltar</button>
+                    <button type="reset" style="--color: tomato;">Limpar</button>
                     <button type="submit" name="submit" style="--color: #47ff56;" disabled>Entrar</button>
                 </div>
-                <a id="recover-password" onclick="recoverPassword()">Recuperar Senha</a>
+
+                <p id="createAccount">
+                    Não possui uma conta?
+                    <a onclick="registration()">Cadastrar</a>
+                </p>
+
             </form>
         </main>
 
