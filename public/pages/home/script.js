@@ -75,6 +75,7 @@ function author(data) {
     })
 }
 
+const $self = document.querySelector("#self");
 const search = (element) => {
     const value = element.value;
     const regex = new RegExp(value, 'i');
@@ -87,6 +88,7 @@ const search = (element) => {
         :poeiria(vazio.test(value) ? searchAuthor($author) : registers.filter((register) => 
             (regex.test(register.title) || regex.test(register.lines.join(" "))) && regexA.test(register.author)));
     sessionStorage.setItem("filter", JSON.stringify({search: value, author: $author.value}));
+    $self.checked = false;
 }
 
 const searchAuthor = (element) => {
@@ -97,7 +99,6 @@ const searchAuthor = (element) => {
         }
     };    
     
-    const $search = $search;
     const regexS = new RegExp($search.value, 'i');
     
     vazio.test($search.value) 
@@ -105,4 +106,37 @@ const searchAuthor = (element) => {
     :poeiria(vazio.test(value) ? search($search) : registers.filter((register) => 
         (regexS.test(register.title) || regexS.test(register.lines.join(" "))) && regex.test(register.author)));
     sessionStorage.setItem("filter", JSON.stringify({search: $search.value, author: value}));
+    $self.checked = false;
+}
+
+const searchSelf = async (element) => {
+    try {
+        isLoading.true();
+        console.log(element.checked)
+        if(element.checked) {
+            const value = await Poeiria.getMyUID();
+            const regex = {test: (valueTest) => value === valueTest};    
+            
+            $search.value = "";
+            $author.value = "";
+                
+            poeiria(vazio.test(value) ? registers : registers.filter((register) => regex.test(register.createdBy)))
+        }
+        else {
+            // Filter
+            filterSaved = JSON.parse(sessionStorage.getItem("filter"));
+            if(filterSaved && (!vazio.test(filterSaved.search) || !vazio.test(filterSaved.author))) {
+                $search.value = filterSaved.search;
+                $author.value = filterSaved.author;
+                search($search);
+            } 
+            else {
+                poeiria(registers);
+            }
+        }
+    }
+    catch (error) {
+        openDialog.alert("Erro na pesquisa","Tente novamente mais tarde");
+    }
+    finally{isLoading.false()}
 }

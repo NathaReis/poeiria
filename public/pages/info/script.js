@@ -17,10 +17,13 @@ function renderBall(x, y) {
 
     x -= size / 2;
     y -= size / 2;
+
+    const headerSize = parseInt(getComputedStyle(document.querySelector("header")).height, 10);
+    const ballStyleShadow = 10;
     
     // Verificando se a bola está dentro dos limites da janela
-    x = Math.max(0, Math.min(window.innerWidth - size, x));
-    y = Math.max(0, Math.min(window.innerHeight - size - 70, y));
+    x = Math.max(ballStyleShadow, Math.min(window.innerWidth - size - ballStyleShadow, x));
+    y = Math.max(ballStyleShadow, Math.min(window.innerHeight - size - headerSize - ballStyleShadow, y));
 
     $ball.style.left = `${x}px`;
     $ball.style.top = `${y}px`;

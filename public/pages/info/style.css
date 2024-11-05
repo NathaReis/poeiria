@@ -7,6 +7,7 @@ main {
     display: grid;
     align-items: center;
     justify-content: center;
+    background: var(--background);
 
     #ball {
         position: absolute;
@@ -18,6 +19,28 @@ main {
         background-size: cover;
         filter: brightness(50%);
         z-index: 1;
+        border: 4px solid var(--inputCL);
+        box-shadow: 0 0 10px var(--inputCL);
+    }
+
+    #ball::after {
+        content: '';
+        position: absolute;
+        height: 300px;
+        width: 4px;
+        background-color: var(--inputCL);
+        top: 0;
+        left: calc(150px - 2px);
+    }
+
+    #ball::before {
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 300px;
+        background-color: var(--inputCL);
+        top: calc(150px - 2px);
+        left: 0;
     }
 
     .box {
