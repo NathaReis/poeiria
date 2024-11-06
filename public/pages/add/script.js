@@ -97,6 +97,7 @@ $form.addEventListener("submit", async (e) => {
 async function getImage(page=1) {
     try {
         isLoading.true();
+        
         if(!vazio.test($search.value)) {
             const result = await fetch(`https://api.pexels.com/v1/search/?locale=pt-BR&page=${page}&per_page=16&query=${$search.value}`, {
                 headers: {
@@ -108,30 +109,16 @@ async function getImage(page=1) {
             const numPages = Math.ceil(media.total_results / media.per_page);
             const prevPage = page === 1 ? numPages : page - 1;
             const nextPage = page === numPages ? 1 : page + 1;
-            
-            const promises = [
-                fetch(`https://api.pexels.com/v1/search/?locale=pt-BR&page=${prevPage}&per_page=15&query=${$search.value}`, {
-                    headers: {
-                        Authorization: "Tjv2x3OIQnFfuvJtPWnXMmlZbfHKBPfoSvOwboq7Hckk5VwIptQY22gs"
-                    }
-                }),
-                fetch(`https://api.pexels.com/v1/search/?locale=pt-BR&page=${nextPage}&per_page=15&query=${$search.value}`, {
-                    headers: {
-                        Authorization: "Tjv2x3OIQnFfuvJtPWnXMmlZbfHKBPfoSvOwboq7Hckk5VwIptQY22gs"
-                    }
-                })
-            ];
-            const [resultPrev, resultNext] = await Promise.all(promises);
-            
+
             currentMedia['media'] = media;
-            currentMedia['prevMedia'] = await resultPrev.json();
-            currentMedia['nextMedia'] = await resultNext.json();
+            currentMedia['prevMedia'] = prevPage;
+            currentMedia['nextMedia'] = nextPage;
             currentMedia['numPages'] = numPages;
-            page === 1 ? renderImage() : null;
+            document.querySelector(".max h6").innerHTML = currentMedia['numPages'];
+            
+            return renderImage();
         }
-        else {
-            reset();
-        }
+        reset();
     }
     catch (error) {
         openDialog.alert("Imagem", error);
@@ -144,43 +131,39 @@ $search.onkeydown = (event) => {
     }
 }
 
-function renderImage(page='media') {
+async function renderImage(page='media') {
     $images.innerHTML = "";
-    
-    document.querySelector(".current h6").innerHTML = currentMedia[page].page;
-    document.querySelector(".max h6").innerHTML = currentMedia['numPages'];
-    
-    currentMedia[page].photos.forEach((photo) => {
-        const img = document.createElement("img");
-        img.src = photo.src.large;
-        img.onclick = () => {
-            const $imgs = $images.querySelectorAll("img");
-            $imgs.forEach((i) => i.classList.remove("focus"));
-            
-            if(urlImage === img.src) {
-                urlImage = "";
-            }
-            else {
-                urlImage = img.src;
-                img.classList.add("focus");
-            }
-        }
-        $images.appendChild(img);
-    })
-        
-    page !== 'media' ? setCurrentImage(page) : null;
-}
 
-function setCurrentImage(page) {
-    getImage(currentMedia[page].page)
+    if(page !== 'media') {
+        getImage(currentMedia[page]);
+    }
+    else {
+        document.querySelector(".current h6").innerHTML = currentMedia['media'].page;
+        
+        currentMedia['media'].photos.forEach((photo) => {
+            const img = document.createElement("img");
+            img.src = photo.src.large;
+            img.onclick = () => {
+                const $imgs = $images.querySelectorAll("img");
+                $imgs.forEach((i) => i.classList.remove("focus"));
+                
+                if(urlImage === img.src) {
+                    urlImage = "";
+                }
+                else {
+                    urlImage = img.src;
+                    img.classList.add("focus");
+                }
+            }
+            $images.appendChild(img);
+        })
+    }
 }
 
 function page(next) {
-    if(currentMedia) {
-        next
-            ?renderImage('nextMedia')
-            :renderImage('prevMedia');
-    }
+    next && currentMedia
+        ?renderImage('nextMedia')
+        :renderImage('prevMedia');
 }
 
 function locationDoc() {
