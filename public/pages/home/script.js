@@ -17,14 +17,14 @@ let filterSaved;
 async function getAll() {
     try {
         isLoading.true();
-        sessionStorage.removeItem("register");
+        localStorage.removeItem("register");
 
         registers = await Poeiria.getAll();
         poeiria(registers);
         author(registers);
         
         // Filter
-        filterSaved = JSON.parse(sessionStorage.getItem("filter"));
+        filterSaved = JSON.parse(localStorage.getItem("filter"));
         if(filterSaved && (!vazio.test(filterSaved.search) || !vazio.test(filterSaved.author))) {
             $search.value = filterSaved.search;
             $author.value = filterSaved.author;
@@ -52,7 +52,7 @@ function poeiria(data) {
             p.innerHTML = `<strong>${poeiria.title}</strong> ${poeiria.lines.join(", ")}`;
     
             card.onclick = () => {
-                sessionStorage.setItem("register", JSON.stringify(poeiria));
+                localStorage.setItem("register", JSON.stringify(poeiria));
                 location = `../read/index.html?doc=${poeiria.uid}`;
             }
     
@@ -87,7 +87,7 @@ const search = (element) => {
         ?poeiria(vazio.test(value) ? registers : registers.filter((register) => (regex.test(register.title) || regex.test(register.lines.join(" ")))))
         :poeiria(vazio.test(value) ? searchAuthor($author) : registers.filter((register) => 
             (regex.test(register.title) || regex.test(register.lines.join(" "))) && regexA.test(register.author)));
-    sessionStorage.setItem("filter", JSON.stringify({search: value, author: $author.value}));
+    localStorage.setItem("filter", JSON.stringify({search: value, author: $author.value}));
     $self.checked = false;
 }
 
@@ -105,7 +105,7 @@ const searchAuthor = (element) => {
     ?poeiria(vazio.test(value) ? registers : registers.filter((register) => regex.test(register.author)))
     :poeiria(vazio.test(value) ? search($search) : registers.filter((register) => 
         (regexS.test(register.title) || regexS.test(register.lines.join(" "))) && regex.test(register.author)));
-    sessionStorage.setItem("filter", JSON.stringify({search: $search.value, author: value}));
+    localStorage.setItem("filter", JSON.stringify({search: $search.value, author: value}));
     $self.checked = false;
 }
 
@@ -124,7 +124,7 @@ const searchSelf = async (element) => {
         }
         else {
             // Filter
-            filterSaved = JSON.parse(sessionStorage.getItem("filter"));
+            filterSaved = JSON.parse(localStorage.getItem("filter"));
             if(filterSaved && (!vazio.test(filterSaved.search) || !vazio.test(filterSaved.author))) {
                 $search.value = filterSaved.search;
                 $author.value = filterSaved.author;

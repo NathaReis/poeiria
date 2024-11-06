@@ -9,9 +9,9 @@ let currentMedia = {};
 (async () => {
     try {
         isLoading.true();
-        const poeiriaSession = JSON.parse(sessionStorage.getItem("register"));
+        const poeiriaSession = JSON.parse(localStorage.getItem("register"));
         poeiria = poeiriaSession ? poeiriaSession : await Poeiria.getDoc();
-        !poeiriaSession ? sessionStorage.setItem("register", JSON.stringify(poeiria)) : null;
+        !poeiriaSession ? localStorage.setItem("register", JSON.stringify(poeiria)) : null;
     
         if(poeiria) {
             $form.author.value = poeiria.author;
@@ -74,7 +74,7 @@ $form.addEventListener("submit", async (e) => {
                 }
                 else {
                     await Poeiria.setDoc(data);
-                    sessionStorage.removeItem("register");
+                    localStorage.removeItem("register");
                     const docId = new URLSearchParams(location.search).get('doc');
                     location = `../read/index.html?doc=${docId}`;
                 }
