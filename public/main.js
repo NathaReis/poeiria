@@ -17,7 +17,7 @@ const theme = (element) => {
 
     if(localStorage.getItem("isAndroid")) {
         const $boxHeader = document.querySelector("header .box");
-        $boxHeader.classList.add("android");
+        $boxHeader.classList.add("androidHeader");
     }
 })()
 

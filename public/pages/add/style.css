@@ -4,6 +4,11 @@
     scroll-behavior: smooth;
 }
 
+main.android {
+    height: calc(100dvh - 99px);
+    margin-top: 99px;
+}
+
 main {
     width: 100dvw;
     height: calc(100dvh - 70px);
@@ -13,7 +18,7 @@ main {
     justify-content: center;
 
     #box.android {
-        max-height: calc(100dvh - 200px);
+        max-height: calc(100dvh - 99px);
     }
 
     #box {

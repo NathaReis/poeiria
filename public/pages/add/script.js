@@ -36,7 +36,9 @@ let currentMedia = {};
 function isAndroid() {
     if(localStorage.getItem("isAndroid")) {
         $box = document.querySelector("#box");
+        $main = document.querySelector("main");
         $box.classList.add("android");
+        $main.classList.add("android");
     }
 }
 isAndroid();
