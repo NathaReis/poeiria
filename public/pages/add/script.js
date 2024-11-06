@@ -175,18 +175,6 @@ function setCurrentImage(page) {
     getImage(currentMedia[page].page)
 }
 
-function formToggle(image) {
-    const $imageBox = document.querySelector("#images-box");
-    if(image) {
-        $imageBox.classList.add("active");
-        $form.classList.add("desactive");
-    }
-    else {
-        $form.classList.remove("desactive");
-        $imageBox.classList.remove("active");
-    }
-}
-
 function page(next) {
     if(currentMedia) {
         next
@@ -198,4 +186,10 @@ function page(next) {
 function locationDoc() {
     const docId = new URLSearchParams(location.search).get('doc');
     location = docId ? `../read/index.html?doc=${docId}` : "../home/index.html";
+}
+
+function pageImages(images) {
+    const link = document.createElement("a");
+    link.href = images ? "#images-box" : "#form";
+    link.click();
 }
