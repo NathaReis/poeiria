@@ -33,6 +33,14 @@ let currentMedia = {};
     finally{isLoading.false()}
 })()
 
+function isAndroid() {
+    if(localStorage.getItem("isAndroid")) {
+        $box = document.querySelector("#box");
+        $box.classList.add("android");
+    }
+}
+isAndroid();
+
 const reset = () => {
     $search.value = "";
     urlImage = "";

@@ -60,6 +60,10 @@ form {
         }
     }
 
+    p#createAccount.android {
+        font-size: .9rem;
+    }
+    
     p#createAccount {
         font-family: Arial, Helvetica, sans-serif;
         color: #fff;
@@ -145,4 +149,8 @@ input {
     outline: none;
     font-size: 1rem;
     margin: 0;
+}
+
+input.android {
+    padding: 4px 0 0 10px;
 }

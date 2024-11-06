@@ -65,6 +65,7 @@ header {
     position: fixed;
     width: 100dvw;
     overflow: hidden;
+    z-index: 1000;
 
     .box {
         /* background-color: var(--header); */
@@ -111,6 +112,7 @@ header {
                 cursor: pointer;
                 padding: 10px;
                 border-radius: 10px;
+                filter: drop-shadow(0 0 2px var(--inputBG));
             }
 
             li a svg:hover {
@@ -119,6 +121,10 @@ header {
             }
         }
     }
+}
+
+.android {
+    padding: 30px 15px 0 !important;
 }
 
 @media (max-width: 620px) {
@@ -237,8 +243,4 @@ dialog {
 
 .rotate {
     transform: rotateZ(180deg);
-}
-
-.padding {
-    padding: 30px 15px 0 !important;
 }
