@@ -144,8 +144,7 @@ const Poeiria = {
       try {
         const docId = new URLSearchParams(location.search).get('doc');
         const snapshot = await firebase.firestore().collection(collectionName).doc(docId).get();
-        const {uid, ...info} = snapshot.data();
-        return info;
+        return snapshot.data();
       }
       catch (error) {
         throw formatedError(error);
