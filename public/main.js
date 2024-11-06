@@ -54,21 +54,6 @@ async function logout() {
     }
 }
 
-// Style Header
-const $header = document.querySelector("header");
-let prevScrollpos = window.pageYOffset;
-
-window.onscroll = () => {
-    const currentScrollPos = window.pageYOffset;
-    if(prevScrollpos > currentScrollPos) {
-        $header.classList.remove("header-scroll");
-    }
-    else {
-        $header.classList.add("header-scroll");
-    };
-    prevScrollpos = currentScrollPos;
-}
-
 // DIALOG
 document.querySelector("body").innerHTML += `
     <dialog>

@@ -67,7 +67,9 @@ header {
     overflow: hidden;
 
     .box {
-        background-color: var(--header);
+        /* background-color: var(--header); */
+        background-color: var(--transparent);
+        backdrop-filter: blur(15px);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -105,7 +107,7 @@ header {
 
             li a svg {
                 width: 25px;
-                fill: #dddddd;
+                fill: var(--inputCL);
                 cursor: pointer;
                 padding: 10px;
                 border-radius: 10px;
@@ -113,7 +115,7 @@ header {
 
             li a svg:hover {
                 fill: var(--color);
-                background-color: var(--svgBGH);
+                background-color: var(--inputBG);
             }
         }
     }
