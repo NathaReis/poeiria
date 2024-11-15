@@ -7,16 +7,21 @@ let poeiria;
         isLoading.true();
         const poeiriaSession = JSON.parse(localStorage.getItem("register"));
 
+        alert("START")
         if(!poeiriaSession) {
+            alert("!P")
             poeiria = await Poeiria.getDoc();
             localStorage.setItem("register", JSON.stringify(poeiria));
         }
         else {
+            alert("P")
             const docId = new URLSearchParams(location.search).get('doc');
-            if(poeiria.id === docId) {
+            if(poeiriaSession.uid === docId) {
+                alert("UID")
                 poeiria = poeiriaSession;
             }
             else {
+                alert("!UID")
                 poeiria = await Poeiria.getDoc();
             }
         }
