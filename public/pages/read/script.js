@@ -102,11 +102,12 @@ function locationDoc() {
 async function restore() {
     try {
         isLoading.true();
-        const response = await openDialog.confirm(`Deseja restaurar ${poeiria.title}?`);
+        const response = await openDialog.confirm(`Deseja publicar ${poeiria.title}?`);
         if(response) {
            poeiria['deletedAt'] = null;
            await Poeiria.setDoc(poeiria, poeiria.uid);
-           location = "../write/index.html";
+           localStorage.removeItem("register");
+           history.back();
         }
     }
     catch (error) {
