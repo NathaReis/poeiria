@@ -79,8 +79,9 @@ $form.addEventListener("submit", async (e) => {
                 if(!poeiria) {
                     data['createdBy'] = uid;
                     data['createdAt'] = (new Date()).toDateString();
-                    await Poeiria.addDoc(data);
-                    reset();
+                    data['deletedAt'] = (new Date()).toDateString();
+                    const docId = await Poeiria.addDoc(data);
+                    location = `../read/index.html?doc=${docId}`;
                 }
                 else {
                     await Poeiria.setDoc(data);

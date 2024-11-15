@@ -7,23 +7,15 @@ let poeiria;
         isLoading.true();
         const poeiriaSession = JSON.parse(localStorage.getItem("register"));
 
-        alert("START")
         if(!poeiriaSession) {
-            alert("!P")
             poeiria = await Poeiria.getDoc();
             localStorage.setItem("register", JSON.stringify(poeiria));
         }
         else {
-            alert("P")
             const docId = new URLSearchParams(location.search).get('doc');
-            if(poeiriaSession.uid === docId) {
-                alert("UID")
-                poeiria = poeiriaSession;
-            }
-            else {
-                alert("!UID")
-                poeiria = await Poeiria.getDoc();
-            }
+            poeiria = poeiriaSession.uid === docId
+                ? poeiriaSession
+                : poeiria = await Poeiria.getDoc();
         }
         
         $box.querySelector("h1").innerHTML = poeiria.title;
@@ -56,7 +48,7 @@ async function deleteData() {
     try {
         isLoading.true();
         if(poeiria.deletedAt == null) {
-            const response = await openDialog.confirm("Deseja excluir o texto?");
+            const response = await openDialog.confirm("Deseja retirar a publicação?");
             if(response) {
                 await Poeiria.recycleDoc() 
                 location = "../home/index.html";
@@ -66,7 +58,7 @@ async function deleteData() {
             const response = await openDialog.confirm("Excluir PERMANENTEMENTE?");
             if(response) {
                 await Poeiria.deleteDoc();
-                location = "../recycle/index.html";
+                location = "../write/index.html";
             }
         }
     }
@@ -114,7 +106,7 @@ async function restore() {
         if(response) {
            poeiria['deletedAt'] = null;
            await Poeiria.setDoc(poeiria, poeiria.uid);
-           location = "../recycle/index.html";
+           location = "../write/index.html";
         }
     }
     catch (error) {

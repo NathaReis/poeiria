@@ -135,7 +135,8 @@ const Poeiria = {
     },
     addDoc: async (data) => {
       try {
-        return await exe(firebase.firestore().collection(collectionName).add(data));      
+        const docRef = await exe(firebase.firestore().collection(collectionName).add(data));      
+        return (await docRef.get()).id;
       } catch (error) {
         throw formatedError(error);
       }
