@@ -78,8 +78,8 @@ $form.addEventListener("submit", async (e) => {
                 
                 if(!poeiria) {
                     data['createdBy'] = uid;
-                    data['createdAt'] = (new Date()).toDateString();
-                    data['deletedAt'] = (new Date()).toDateString();
+                    data['createdAt'] = new Date().toDateString();
+                    data['published'] = false;
                     const docId = await Poeiria.addDoc(data);
                     location = `../read/index.html?doc=${docId}`;
                 }

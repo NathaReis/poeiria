@@ -64,7 +64,8 @@ main {
             display: grid;
             justify-content: center;
             align-items: center;
-            cursor: pointer;           
+            cursor: pointer;     
+            place-items: center;      
 
             .img {
                 width: 100%;
@@ -119,9 +120,15 @@ main {
         .box {
             .card {
                 flex-basis: 100dvw;
+                display: grid;
+                align-items: center;
+                justify-content: center;
 
                 .img {
                     width: 100dvw;
+                }
+                p {
+                    width: 80dvw;
                 }
             }
         }       

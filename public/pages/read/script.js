@@ -32,7 +32,7 @@ let poeiria;
             }
         })
 
-        if(poeiria.deletedAt != null) {
+        if(!poeiria.published) {
             const notRestore = document.querySelectorAll(".notRestore");
             notRestore.forEach(n => n.remove());
             document.querySelector("#restore").classList.remove("hidden");
@@ -50,7 +50,7 @@ async function deleteData() {
         if(poeiria.deletedAt == null) {
             const response = await openDialog.confirm("Deseja retirar a publicação?");
             if(response) {
-                await Poeiria.recycleDoc() 
+                await Poeiria.noPublishedDoc();
                 location = "../home/index.html";
             }
         }
@@ -99,12 +99,12 @@ function locationDoc() {
     location = docId ? `../add/index.html?doc=${docId}` : "../add/index.html";
 }
 
-async function restore() {
+async function published() {
     try {
         isLoading.true();
         const response = await openDialog.confirm(`Deseja publicar ${poeiria.title}?`);
         if(response) {
-           poeiria['deletedAt'] = null;
+           poeiria['published'] = true;
            await Poeiria.setDoc(poeiria, poeiria.uid);
            localStorage.removeItem("register");
            history.back();

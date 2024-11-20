@@ -94,40 +94,17 @@ function formatedError(error) {
 }
 
 const Poeiria = {
-    getAll: async (recycled=false) => {
-      try {
-        const hashLocal = localStorage.getItem("hash");
-        const local = JSON.parse(localStorage.getItem("registers"));
-        let docs = [];
-        let hash = (await firebase.firestore().collection(collectionName).doc(hashUID).get()).data().hash;
-        if(local && hash === hashLocal) {
-          docs = local;
-        }
-        else {
-          const snapshot = await firebase.firestore().collection(collectionName).orderBy('title', 'asc').get();
-          docs = snapshot.docs.map(doc => ({
-            ...doc.data(),
-            uid: doc.id
-          }));
-        }
-
-        localStorage.setItem("hash", hash);
-        localStorage.setItem("registers",JSON.stringify(docs));
-        
-        const readDoc = [];
-        const deletedDoc = [];
-        for(let doc of docs) {
-          if(doc.deletedAt == null) {
-            readDoc.push(doc);
-          }
-          else {
-            const myUID = await Poeiria.getMyUID();
-            if(doc.createdBy === myUID) {
-              deletedDoc.push(doc);
-            }
-          }
-        }
-        return recycled ? deletedDoc : readDoc;
+    getAll: async (published=true) => {
+      try {        
+        const snapshot = await firebase.firestore()
+          .collection(collectionName)
+          .where("published", "==", published)  
+          .orderBy('title', 'asc')
+          .get();
+        return [...snapshot.docs.map(doc => ({
+          ...doc.data(),
+          uid: doc.id
+        }))].filter(doc => !doc.deletedAt);
       }
       catch (error) {
         throw formatedError(error);
@@ -160,11 +137,11 @@ const Poeiria = {
         throw formatedError(error);
       }
     },
-    recycleDoc: async () => {
+    noPublishedDoc: async () => {
       try {
         const docId = new URLSearchParams(location.search).get('doc');
         return await exe(firebase.firestore().collection(collectionName).doc(docId).update({
-          deletedAt: new Date().toDateString()
+          published: false
         }));
       } catch (error) {
         throw formatedError(error);
@@ -173,7 +150,9 @@ const Poeiria = {
     deleteDoc: async () => {
       try {
         const docId = new URLSearchParams(location.search).get('doc');
-        return await exe(firebase.firestore().collection(collectionName).doc(docId).delete());
+        return await exe(firebase.firestore().collection(collectionName).doc(docId).update({
+          deletedAt: new Date().toDateString()
+        }));      
       } catch (error) {
         throw formatedError(error);
       }
