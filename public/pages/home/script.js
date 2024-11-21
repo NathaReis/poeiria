@@ -48,8 +48,8 @@ function poeiria(data) {
             const img = document.createElement("div");
             img.classList.add("img");
             img.style = poeiria.url ? `--url: url(${poeiria.url})` : '--url: url(../../assets/book.webp)';
-            const p = document.createElement("p");
-            p.innerHTML = `<strong>${poeiria.title}</strong> ${poeiria.lines.join(", ")}`;
+            const h1 = document.createElement("h1");
+            h1.innerHTML = poeiria.title;
     
             card.onclick = () => {
                 localStorage.setItem("register", JSON.stringify(poeiria));
@@ -57,7 +57,7 @@ function poeiria(data) {
             }
     
             card.appendChild(img);
-            card.appendChild(p);
+            card.appendChild(h1);
             $box.appendChild(card);
         });
     }
