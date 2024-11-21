@@ -6,35 +6,33 @@
 }
 
 :root {
-    --background: #0d0d0d;
+    --background: #47667b;
     --header: #2d2d2d;
-    --sloganCLH: #535353;
-    --sloganCL: #dddddd;
-    --inputBG: #2d2d2d;
-    --inputCL: #fff;
+    --sloganCL: #ffffff;
+    --inputBG: #6d8b89;
+    --inputCL: #f8f4c4;
     --scrollCL: #424242;
     --scrollBG: #000;
     --svgBGH: #0d0d0d;
-    --txt: #fff;
-    --txtI: #383838;
+    --txt: #6d8b89;
+    --txtI: #d5e0b5;
     --transparent: #fff1;
     --shadow: 0 0 10px #fff1;
 }
 
 .light:root {
-    --background: #dddddd;
+    --background: #c6f5ff;
     --svgBGH: #6d6d6d;
     --header: #949494;
-    --sloganCLH: #dddddd;
     --sloganCL: #0d0d0d;
     --inputBG: #fff;
     --inputCL: #000;
     --scrollCL: #cecece;
     --scrollBG: #eee;
-    --txt: #000;
-    --txtI: #a0a0a0;
-    --transparent: #0001;
-    --shadow: 0 0 10px #0001;
+    --txt: #fff;
+    --txtI: #6d8b89;
+    --transparent: #47667b34;
+    --shadow: 0 0 10px #47667b34;
 }
 
 .container {
@@ -69,7 +67,6 @@ header {
     z-index: 1000;
 
     .box {
-        /* background-color: var(--header); */
         background-color: var(--transparent);
         backdrop-filter: blur(15px);
         display: flex;
@@ -88,6 +85,7 @@ header {
             align-items: center;
             justify-content: center;
             gap: 2px;
+            transition: none;
 
             img {
                 width: 50px;
@@ -95,8 +93,7 @@ header {
         }
 
         #slogan:hover {
-            color: var(--sloganCLH);
-            text-shadow: 0 0 10px #00000085, 0 0 50px #000000;
+            opacity: .5;
         }
 
         menu {
@@ -114,6 +111,7 @@ header {
                 padding: 10px;
                 border-radius: 10px;
                 filter: drop-shadow(0 0 2px var(--inputBG));
+                transition: .1s;
             }
 
             li a svg:hover {
@@ -159,6 +157,10 @@ input, textarea, select {
     margin: 0 15px;
 }
 
+input::placeholder, textarea::placeholder {
+    color: var(--inputCL);
+}
+
 textarea {
     min-height: 120px;
     max-height: 120px;
@@ -176,7 +178,7 @@ dialog {
     height: 100dvh;
     background: var(--transparent);
     backdrop-filter: blur(10px);
-    color: var(--txt);
+    color: var(--txtI);
     font-family: sans-serif;
     border: none;
     z-index: 1000;
