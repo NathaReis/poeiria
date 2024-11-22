@@ -6,22 +6,22 @@
 }
 
 :root {
-    --background: #47667b;
+    --background: #2d2d2d;
     --header: #2d2d2d;
     --sloganCL: #ffffff;
-    --inputBG: #6d8b89;
-    --inputCL: #f8f4c4;
+    --inputBG: #272727;
+    --inputCL: #eeeeee;
     --scrollCL: #424242;
     --scrollBG: #000;
     --svgBGH: #0d0d0d;
-    --txt: #6d8b89;
-    --txtI: #d5e0b5;
-    --transparent: #fff1;
+    --txt: #202020;
+    --txtI: #b2d3d1;
+    --transparent: rgba(0, 140, 255, 0.178);
     --shadow: 0 0 10px #fff1;
 }
 
 .light:root {
-    --background: #c6f5ff;
+    --background: #dddddd;
     --svgBGH: #6d6d6d;
     --header: #949494;
     --sloganCL: #0d0d0d;
@@ -30,8 +30,8 @@
     --scrollCL: #cecece;
     --scrollBG: #eee;
     --txt: #fff;
-    --txtI: #6d8b89;
-    --transparent: #47667b34;
+    --txtI: #df8e5f;
+    --transparent: rgba(255, 166, 0, 0.253);
     --shadow: 0 0 10px #47667b34;
 }
 
@@ -103,6 +103,9 @@ header {
             align-items: center;
             justify-content: space-between;
             padding: 10px;
+            background-color: var(--background);
+            border-bottom: 3px solid var(--transparent);
+            border-top: 3px solid var(--transparent);
 
             li a svg {
                 width: 25px;
@@ -110,7 +113,6 @@ header {
                 cursor: pointer;
                 padding: 10px;
                 border-radius: 10px;
-                filter: drop-shadow(0 0 2px var(--inputBG));
                 transition: .1s;
             }
 

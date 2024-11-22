@@ -75,7 +75,7 @@ main {
                     height: 50px;
                     padding: 10px;
                     border-radius: 10px;
-                    background-color: #000;
+                    background-color: var(--inputBG);
                     border: none;
                     color: #fff;
                     outline: none;
