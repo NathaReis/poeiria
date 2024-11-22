@@ -81,12 +81,14 @@ $form.addEventListener("submit", async (e) => {
                     data['createdAt'] = new Date().toDateString();
                     data['published'] = false;
                     const docId = await Poeiria.addDoc(data);
+                    reset();
                     location = `../read/index.html?doc=${docId}`;
                 }
                 else {
                     await Poeiria.setDoc(data);
                     localStorage.removeItem("register");
                     const docId = new URLSearchParams(location.search).get('doc');
+                    reset();
                     location = `../read/index.html?doc=${docId}`;
                 }
             }
