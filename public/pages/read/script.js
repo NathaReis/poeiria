@@ -47,7 +47,7 @@ let poeiria;
 async function deleteData() {
     try {
         isLoading.true();
-        if(poeiria.deletedAt == null) {
+        if(poeiria.published) {
             const response = await openDialog.confirm("Deseja retirar a publicação?");
             if(response) {
                 await Poeiria.noPublishedDoc();
